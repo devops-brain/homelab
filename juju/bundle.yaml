@@ -12,7 +12,7 @@ services:
       gui-x: '90'
       gui-y: '420'
     charm: cs:~containers/easyrsa-303
-    constraints: cores=1 mem=.5G root-disk=8G
+    constraints: cores=2 mem=1G root-disk=8G
     num_units: 1
     resources:
       easyrsa: 5
@@ -21,7 +21,7 @@ services:
       gui-x: '800'
       gui-y: '420'
     charm: cs:~containers/etcd-501
-    constraints: cores=4 mem=8G root-disk=8G
+    constraints: cores=4 mem=7G root-disk=8G
     num_units: 3
     options:
       channel: 3.3/stable
@@ -43,7 +43,7 @@ services:
       gui-x: '450'
       gui-y: '250'
     charm: cs:~containers/kubeapi-load-balancer-715
-    constraints: cores=4 mem=2G root-disk=8G
+    constraints: cores=4 mem=1G root-disk=8G
     expose: true
     num_units: 1
     resources: {}
@@ -53,7 +53,7 @@ services:
       gui-y: '850'
     charm: cs:~containers/kubernetes-master-826
     constraints: cores=2 mem=4G root-disk=16G
-    num_units: 2
+    num_units: 1
     options:
       channel: 1.18/stable
     resources:
@@ -69,7 +69,7 @@ services:
       gui-x: '90'
       gui-y: '850'
     charm: cs:~containers/kubernetes-worker-661
-    constraints: cores=4 mem=8G root-disk=100G
+    constraints: cores=2 mem=1G root-disk=16G
     expose: true
     num_units: 1
     options:
