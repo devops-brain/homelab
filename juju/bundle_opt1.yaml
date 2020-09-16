@@ -1,62 +1,64 @@
 applications:
   containerd:
-    charm: 'cs:~containers/containerd-88'
-    series: focal
+    charm: 'cs:~containers/containerd-80'
+    series: bionic
     annotations:
       gui-x: '475'
       gui-y: '800'
   easyrsa:
-    charm: 'cs:~containers/easyrsa-325'
+    charm: 'cs:~containers/easyrsa-318'
     num_units: 1
-    series: focal
+    series: bionic
     annotations:
       gui-x: '90'
       gui-y: '420'
     to:
-      - '6'
+      - '9'
   etcd:
-    charm: 'cs:~containers/etcd-531'
+    charm: 'cs:~containers/etcd-521'
     num_units: 3
     options:
       channel: 3.3/stable
-    series: focal
+    series: bionic
     annotations:
       gui-x: '800'
       gui-y: '420'
     to:
-      - '0'
-      - '1'
-      - '2'
+      - '6'
+      - '7'
+      - '8'
   flannel:
-    charm: 'cs:~containers/flannel-501'
-    series: focal
+    charm: 'cs:~containers/flannel-492'
+    series: bionic
     annotations:
       gui-x: '475'
       gui-y: '605'
   kubeapi-load-balancer:
-    charm: 'cs:~containers/kubeapi-load-balancer-742'
+    charm: 'cs:~containers/kubeapi-load-balancer-730'
     num_units: 1
     expose: true
-    series: focal
+    series: bionic
     annotations:
       gui-x: '450'
       gui-y: '250'
     to:
       - '4'
   kubernetes-master:
-    charm: 'cs:~containers/kubernetes-master-865'
+    charm: 'cs:~containers/kubernetes-master-850'
     num_units: 1
-    series: focal
+    series: bionic
     annotations:
       gui-x: '800'
       gui-y: '850'
     to:
       - '5'
   kubernetes-worker:
-    charm: 'cs:~containers/kubernetes-worker-692'
+    charm: 'cs:~containers/kubernetes-worker-682'
     num_units: 4
+    options:
+      labels: FatTwin
     expose: true
-    series: focal
+    series: bionic
     annotations:
       gui-x: '90'
       gui-y: '850'
@@ -66,15 +68,14 @@ applications:
       - '2'
       - '3'
   ceph-osd:
-    charm: 'cs:ceph-osd-304'
+    charm: 'cs:ceph-osd-303'
     num_units: 4
     options:
-      bluestore: true
-      bluestore-db: /dev/sdb
-      osd-devices: /dev/sdc /dev/sdd /dev/sde /dev/sdf
+      bluestore: false
+      osd-devices: /dev/sdb /dev/sdc /dev/sdd /dev/sde /dev/sdf
       osd-encrypt: true
-      osd-recovery-max-active: 1
-    series: focal
+      osd-journal: /dev/sda2
+    series: bionic
     annotations:
       gui-x: '90'
       gui-y: '1100'
@@ -84,19 +85,19 @@ applications:
       - '2'
       - '3'
   ceph-mon:
-    charm: 'cs:ceph-mon-49'
+    charm: 'cs:ceph-mon-48'
     num_units: 3
     options:
-      expected-osd-count: 16
-      pgs-per-osd: 100
-    series: focal
+      expected-osd-count: 8
+      pgs-per-osd: 200
+    series: bionic
     annotations:
       gui-x: '800'
       gui-y: '1100'
     to:
-      - '0'
-      - '1'
-      - '2'
+      - '10'
+      - '11'
+      - '12'
 relations:
   - - 'kubernetes-master:kube-api-endpoint'
     - 'kubeapi-load-balancer:apiserver'
@@ -138,19 +139,37 @@ relations:
     - 'kubeapi-load-balancer:apiserver'
 machines:
   '0':
-    series: focal
+    series: bionic
   '1':
-    series: focal
+    series: bionic
   '2':
-    series: focal
+    series: bionic
   '3':
-    series: focal
+    series: bionic
   '4':
-    series: focal
+    series: bionic
     constraints: arch=amd64 cpu-cores=2 mem=2G root-disk=8G
   '5':
-    series: focal
-    constraints: arch=amd64 cpu-cores=4 mem=8G root-disk=80G
+    series: bionic
+    constraints: arch=amd64 cpu-cores=2 mem=4G root-disk=64G
   '6':
-    series: focal
+    series: bionic
+    constraints: arch=amd64 cpu-cores=4 mem=8G root-disk=8G
+  '7':
+    series: bionic
+    constraints: arch=amd64 cpu-cores=4 mem=8G root-disk=8G
+  '8':
+    series: bionic
+    constraints: arch=amd64 cpu-cores=4 mem=8G root-disk=8G
+  '9':
+    series: bionic
     constraints: arch=amd64 cpu-cores=1 mem=1G root-disk=8G
+  '10':
+    series: bionic
+    constraints: arch=amd64 cpu-cores=4 mem=4G root-disk=64G
+  '11':
+    series: bionic
+    constraints: arch=amd64 cpu-cores=4 mem=4G root-disk=64G
+  '12':
+    series: bionic
+    constraints: arch=amd64 cpu-cores=4 mem=4G root-disk=64G
