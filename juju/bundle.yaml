@@ -37,7 +37,7 @@ applications:
     charm: 'cs:~containers/kubeapi-load-balancer-742'
     num_units: 1
     expose: true
-    series: focal
+    series: bionic
     annotations:
       gui-x: '450'
       gui-y: '250'
