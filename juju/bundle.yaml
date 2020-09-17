@@ -146,7 +146,7 @@ machines:
   '3':
     series: focal
   '4':
-    series: focal
+    series: bionic
     constraints: arch=amd64 cpu-cores=1 mem=4G root-disk=8G
   '5':
     series: focal
