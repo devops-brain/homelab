@@ -1,25 +1,25 @@
 applications:
   containerd:
     charm: 'cs:~containers/containerd-88'
-    series: bionic
+    series: focal
     annotations:
       gui-x: '475'
       gui-y: '800'
   easyrsa:
     charm: 'cs:~containers/easyrsa-325'
     num_units: 1
-    series: bionic
+    series: focal
     annotations:
       gui-x: '90'
       gui-y: '420'
     to:
-      - '6'
+      - '5'
   etcd:
     charm: 'cs:~containers/etcd-531'
     num_units: 3
     options:
       channel: 3.3/stable
-    series: bionic
+    series: focal
     annotations:
       gui-x: '800'
       gui-y: '420'
@@ -29,7 +29,7 @@ applications:
       - '2'
   flannel:
     charm: 'cs:~containers/flannel-501'
-    series: bionic
+    series: focal
     annotations:
       gui-x: '475'
       gui-y: '605'
@@ -37,7 +37,7 @@ applications:
     charm: 'cs:~containers/kubeapi-load-balancer-742'
     num_units: 1
     expose: true
-    series: bionic
+    series: focal
     annotations:
       gui-x: '450'
       gui-y: '250'
@@ -46,17 +46,17 @@ applications:
   kubernetes-master:
     charm: 'cs:~containers/kubernetes-master-865'
     num_units: 1
-    series: bionic
+    series: focal
     annotations:
       gui-x: '800'
       gui-y: '850'
     to:
-      - '5'
+      - '3'
   kubernetes-worker:
     charm: 'cs:~containers/kubernetes-worker-692'
-    num_units: 4
+    num_units: 3
     expose: true
-    series: bionic
+    series: focal
     annotations:
       gui-x: '90'
       gui-y: '850'
@@ -64,7 +64,6 @@ applications:
       - '0'
       - '1'
       - '2'
-      - '3'
   ceph-osd:
     charm: 'cs:ceph-osd-304'
     num_units: 4
@@ -74,7 +73,7 @@ applications:
       osd-devices: /dev/sdc /dev/sdd /dev/sde /dev/sdf
       osd-encrypt: true
       osd-recovery-max-active: 1
-    series: bionic
+    series: focal
     annotations:
       gui-x: '90'
       gui-y: '1100'
@@ -89,7 +88,7 @@ applications:
     options:
       expected-osd-count: 16
       pgs-per-osd: 100
-    series: bionic
+    series: focal
     annotations:
       gui-x: '800'
       gui-y: '1100'
@@ -138,19 +137,16 @@ relations:
     - 'kubeapi-load-balancer:apiserver'
 machines:
   '0':
-    series: bionic
+    series: focal
   '1':
-    series: bionic
+    series: focal
   '2':
-    series: bionic
+    series: focal
   '3':
-    series: bionic
+    series: focal
   '4':
-    series: bionic
+    series: focal
     constraints: arch=amd64 cpu-cores=1 mem=4G root-disk=8G
   '5':
-    series: bionic
-    constraints: arch=amd64 cpu-cores=2 mem=4G root-disk=16G
-  '6':
-    series: bionic
+    series: focal
     constraints: arch=amd64 cpu-cores=1 mem=1G root-disk=8G
