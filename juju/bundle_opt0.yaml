@@ -64,6 +64,38 @@ applications:
       - '0'
       - '1'
       - '2'
+  ceph-osd:
+    charm: 'cs:ceph-osd-304'
+    num_units: 4
+    options:
+      bluestore: true
+      bluestore-db: /dev/sdb
+      osd-devices: /dev/sdc /dev/sdd /dev/sde /dev/sdf
+      osd-encrypt: true
+      osd-recovery-max-active: 1
+    series: focal
+    annotations:
+      gui-x: '90'
+      gui-y: '1100'
+    to:
+      - '0'
+      - '1'
+      - '2'
+      - '3'
+  ceph-mon:
+    charm: 'cs:ceph-mon-49'
+    num_units: 3
+    options:
+      expected-osd-count: 16
+      pgs-per-osd: 100
+    series: focal
+    annotations:
+      gui-x: '800'
+      gui-y: '1100'
+    to:
+      - '0'
+      - '1'
+      - '2'
 relations:
   - - 'kubernetes-master:kube-api-endpoint'
     - 'kubeapi-load-balancer:apiserver'
@@ -93,6 +125,16 @@ relations:
     - 'kubernetes-worker:container-runtime'
   - - 'containerd:containerd'
     - 'kubernetes-master:container-runtime'
+  - - 'ceph-osd:mon'
+    - 'ceph-mon:osd'
+  - - 'ceph-mon:client'
+    - 'kubernetes-master:ceph-client'
+  - - 'ceph-mon:admin'
+    - 'kubernetes-master:ceph-storage'
+  - - 'ceph-mon:prometheus'
+    - 'kubernetes-worker:kube-api-endpoint'
+  - - 'ceph-mon:prometheus'
+    - 'kubeapi-load-balancer:apiserver'
 machines:
   '0':
     series: focal
