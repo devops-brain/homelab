@@ -94,7 +94,7 @@ applications:
       - '0'
       - '1'
       - '2'
-  ceph-mds:
+  ceph-fs:
     charm: 'cs:ceph-fs-24'
     num_units: 3
     series: focal
