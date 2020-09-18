@@ -51,7 +51,7 @@ applications:
       gui-x: '800'
       gui-y: '850'
     to:
-      - '3'
+      - '6'
   kubernetes-worker:
     charm: 'cs:~containers/kubernetes-worker-692'
     num_units: 3
@@ -61,9 +61,7 @@ applications:
       gui-x: '90'
       gui-y: '850'
     to:
-      - '0'
-      - '1'
-      - '2'
+      - '7'
 relations:
   - - 'kubernetes-master:kube-api-endpoint'
     - 'kubeapi-load-balancer:apiserver'
@@ -108,3 +106,9 @@ machines:
   '5':
     series: focal
     constraints: arch=amd64 cpu-cores=1 mem=1G root-disk=8G
+  '6':
+    series: focal
+    constraints: arch=amd64 cpu-cores=2 mem=4G root-disk=64G
+  '7':
+    series: focal
+    constraints: arch=amd64 cpu-cores=4 mem=8G root-disk=64G
