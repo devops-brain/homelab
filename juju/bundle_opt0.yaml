@@ -13,7 +13,7 @@ applications:
       gui-x: '90'
       gui-y: '420'
     to:
-      - '5'
+      - '4'
   etcd:
     charm: 'cs:~containers/etcd-531'
     num_units: 3
@@ -42,7 +42,7 @@ applications:
       gui-x: '450'
       gui-y: '250'
     to:
-      - '4'
+      - '3'
   kubernetes-master:
     charm: 'cs:~containers/kubernetes-master-865'
     num_units: 1
@@ -51,7 +51,7 @@ applications:
       gui-x: '800'
       gui-y: '850'
     to:
-      - '6'
+      - '5'
   kubernetes-worker:
     charm: 'cs:~containers/kubernetes-worker-692'
     num_units: 1
@@ -61,10 +61,10 @@ applications:
       gui-x: '90'
       gui-y: '850'
     to:
-      - '7'
+      - '6'
   ceph-osd:
     charm: 'cs:ceph-osd-304'
-    num_units: 4
+    num_units: 3
     options:
       bluestore: true
       bluestore-db: /dev/sdb
@@ -79,7 +79,6 @@ applications:
       - '0'
       - '1'
       - '2'
-      - '3'
   ceph-mon:
     charm: 'cs:ceph-mon-49'
     num_units: 3
@@ -102,7 +101,7 @@ applications:
       gui-x: '445'
       gui-y: '1300'
     to:
-      - '8'
+      - '7'
 relations:
   - - 'kubernetes-master:kube-api-endpoint'
     - 'kubeapi-load-balancer:apiserver'
@@ -153,18 +152,16 @@ machines:
     series: focal
   '3':
     series: focal
+    constraints: arch=amd64 cpu-cores=1 mem=4G root-disk=8G
   '4':
     series: focal
-    constraints: arch=amd64 cpu-cores=1 mem=4G root-disk=8G
+    constraints: arch=amd64 cpu-cores=1 mem=1G root-disk=8G
   '5':
     series: focal
-    constraints: arch=amd64 cpu-cores=1 mem=1G root-disk=8G
+    constraints: arch=amd64 cpu-cores=2 mem=4G root-disk=64G
   '6':
     series: focal
-    constraints: arch=amd64 cpu-cores=2 mem=4G root-disk=64G
-  '7':
-    series: focal
     constraints: arch=amd64 cpu-cores=4 mem=8G root-disk=64G
-  '8':
+  '7':
     series: focal
     constraints: arch=amd64 cpu-cores=2 mem=8G root-disk=16G
