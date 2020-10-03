@@ -81,7 +81,7 @@ applications:
     charm: 'cs:ceph-mon-49'
     num_units: 3
     options:
-      expected-osd-count: 16
+      expected-osd-count: 4
       pgs-per-osd: 100
     series: focal
     annotations:
