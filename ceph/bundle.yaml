@@ -48,7 +48,7 @@ machines:
     constraints: arch=amd64 cpu-cores=24 mem=48G root-disk=120G
   '1':
     series: focal
-    constraints: arch=amd64 cpu-cores=2 mem=4G root-disk=32G
+    constraints: arch=amd64 cpu-cores=1 mem=2G root-disk=32G
   '2':
     series: focal
-    constraints: arch=amd64 cpu-cores=2 mem=4G root-disk=32G
+    constraints: arch=amd64 cpu-cores=1 mem=2G root-disk=32G
