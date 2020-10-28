@@ -1,7 +1,7 @@
 applications:
   ceph-osd:
     charm: 'cs:ceph-osd-304'
-    num_units: 1
+    num_units: 3
     options:
       bluestore: true
       bluestore-db: /dev/sdb
@@ -14,11 +14,13 @@ applications:
       gui-y: '1100'
     to:
       - '0'
+      - '1'
+      - '2'
   ceph-mon:
     charm: 'cs:ceph-mon-49'
     num_units: 3
     options:
-      expected-osd-count: 16
+      expected-osd-count: 12
       pgs-per-osd: 100
     series: focal
     annotations:
@@ -26,8 +28,8 @@ applications:
       gui-y: '1100'
     to:
       - 'lxd:0'
-      - '1'
-      - '2'
+      - 'lxd:1'
+      - 'lxd:2'
   ceph-fs:
     charm: 'cs:ceph-fs-24'
     num_units: 1
@@ -48,7 +50,7 @@ machines:
     constraints: arch=amd64 cpu-cores=24 mem=48G root-disk=120G
   '1':
     series: focal
-    constraints: arch=amd64 cpu-cores=1 mem=2G root-disk=32G
+    constraints: arch=amd64 cpu-cores=24 mem=48G root-disk=120G
   '2':
     series: focal
-    constraints: arch=amd64 cpu-cores=1 mem=2G root-disk=32G
+    constraints: arch=amd64 cpu-cores=24 mem=48G root-disk=120G
