@@ -11,7 +11,7 @@ pipeline {
         echo '''helm repo add rook-release https://charts.rook.io/release '''
       }
     }
-    stage('ceph with rook via helm){
+    stage('ceph with rook via helm'){
       steps {
         echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
         sh "cd ceph; helm upgrade --install --namespace rook-ceph rook-ceph rook-release/rook-ceph -f values.yaml"
