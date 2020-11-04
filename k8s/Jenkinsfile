@@ -8,11 +8,11 @@ pipeline {
       steps {
         echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
         sh 'echo "TODO:  create conditional and run code below"'
-        echo 'juju add-model kube HomeLab;
-             juju model-config -m kube default-series=focal;
-             juju add-machine -m kube wired-clam.khoyi.io;
-             juju add-machine -m kube fast-stag.khoyi.io;
-             juju add-machine -m kube hairy-hyena.khoyi.io;'
+        echo '''juju add-model kube HomeLab
+             juju model-config -m kube default-series=focal
+             juju add-machine -m kube wired-clam.khoyi.io
+             juju add-machine -m kube fast-stag.khoyi.io
+             juju add-machine -m kube hairy-hyena.khoyi.io'''
       }
     }
     stage('update juju deployment'){

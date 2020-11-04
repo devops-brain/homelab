@@ -20,27 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="64feb96e-5147-4cef-88d5-1dde19c466ed" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ceph/Jenkinsfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ceph/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ceph/values.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fahclient/Jenkinsfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fahclient/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fahclient/values.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/k8s/Jenkinsfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/k8s/juju/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/k8s/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/k8s/juju/bundle.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/k8s/juju/bundle_opt0.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/k8s/juju/bundle_opt1.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/k8s/juju/bundle_opt2.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/k8s/juju/changes.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/k8s/changes.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/k8s/juju/post-deployment.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/k8s/juju/tests/20-charm-validation.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/k8s/juju/tests/30-unit-shuffle.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/k8s/juju/tests/40-security-check.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/k8s/juju/tests/amulet_utils.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/k8s/juju/tests/tests.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,7 +83,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1603910378365</updated>
-      <workItem from="1603910379802" duration="53399000" />
+      <workItem from="1603910379802" duration="54087000" />
     </task>
     <servers />
   </component>
