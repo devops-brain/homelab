@@ -1,0 +1,21 @@
+pipeline {
+  agent {
+    label "saltmaster"
+  }
+
+  stages {
+    stage('bootstrap tooling as needed'){
+      steps {
+        echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+        sh 'echo "TODO:  evaluate and run code below"'
+        echo 'helm repo add pcktdmp https://pcktdmp.github.io/charts'
+      }
+    }
+    stage('deploy or update fahclient'){
+      steps {
+        echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+        sh "cd fahclient; helm upgrade --install fahclient pcktdmp/fahclient -f values.yaml"
+      }
+    }
+  }
+}

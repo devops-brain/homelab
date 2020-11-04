@@ -1,0 +1,25 @@
+pipeline {
+  agent {
+    label "saltmaster"
+  }
+
+  stages {
+    stage('bootstrap cluster if missing'){
+      steps {
+        echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+        sh 'echo "TODO:  create conditional and run code below"'
+        echo 'juju add-model kube HomeLab;
+             juju model-config -m kube default-series=focal;
+             juju add-machine -m kube wired-clam.khoyi.io;
+             juju add-machine -m kube fast-stag.khoyi.io;
+             juju add-machine -m kube hairy-hyena.khoyi.io;'
+      }
+    }
+    stage('update juju deployment'){
+      steps {
+        echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+        sh "cd k8s; juju deploy -m kube --map-machines=existing charmed-kubernetes --overlay changes.yaml"
+      }
+    }
+  }
+}

@@ -1,0 +1,29 @@
+pipeline {
+  agent {
+    label "saltmaster"
+  }
+
+  stages {
+    stage('bootstrap resources as needed'){
+      steps {
+        echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+        sh 'echo "TODO:  create conditional and run code below"'
+        echo '''helm repo add rook-release https://charts.rook.io/release
+        # Create a ServiceAccount for Tiller in the `kube-system` namespace
+        kubectl --namespace kube-system create sa tiller
+
+        # Create a ClusterRoleBinding for Tiller
+        kubectl create clusterrolebinding tiller --clusterrole cluster-admin --serviceaccount=kube-system:tiller
+
+        # Patch Tiller's Deployment to use the new ServiceAccount
+        kubectl --namespace kube-system patch deploy/tiller-deploy -p '{"spec": {"template": {"spec": {"serviceAccountName": "tiller"}}}}' '''
+      }
+    }
+    stage('ceph with rook via helm){
+      steps {
+        echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+        sh "cd ceph; helm upgrade --install --namespace rook-ceph rook-ceph rook-release/rook-ceph -f values.yaml"
+      }
+    }
+  }
+}
