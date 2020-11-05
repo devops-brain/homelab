@@ -9,7 +9,7 @@ pipeline {
         echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
         sh 'cd ~/; pwd'
         sh 'helm repo add rook-release https://charts.rook.io/release'
-        sh 'kubectl create namespace rook-ceph'
+        sh 'kubectl create namespace rook-ceph || true'
       }
     }
     stage('ceph with rook via helm'){
