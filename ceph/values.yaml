@@ -12,7 +12,7 @@ resources:
     cpu: 100m
     memory: 256Mi
 
-rbacEnable: false
+rbacEnable: true
 pspEnable: false
 
 csi:
