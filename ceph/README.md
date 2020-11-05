@@ -17,3 +17,5 @@ Instruction page:  https://rook.io/docs/rook/v1.4/helm-operator.html
 ## Usage
 Run the Jenkins job, or read it and run commands manually if you're against automation making life better  ;)
 
+## Note
+The .kube/config file must be loaded into the saltmaster manually before this can work

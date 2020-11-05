@@ -13,7 +13,7 @@ resources:
     memory: 256Mi
 
 rbacEnable: false
-pspEnable: true
+pspEnable: false
 
 csi:
   enableRbdDriver: true
