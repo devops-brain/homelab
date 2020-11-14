@@ -26,6 +26,9 @@ pipeline {
         echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
         echo "This will fail on first run until we can block until previous stage is applied, not just declared."
         sh "juju scp kubernetes-master/0:config ~/.kube/config"
+        sh "rm -fv /home/ubuntu/.kube/config"
+        sh "cp /root/.kube/config /home/ubuntu/.kube/"
+        sh "chown ubuntu /home/ubuntu/.kube/config"
       }
     }
   }
