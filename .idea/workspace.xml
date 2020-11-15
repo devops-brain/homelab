@@ -19,11 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="64feb96e-5147-4cef-88d5-1dde19c466ed" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ceph/Jenkinsfile" beforeDir="false" afterPath="$PROJECT_DIR$/ceph/Jenkinsfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/k8s/Jenkinsfile" beforeDir="false" afterPath="$PROJECT_DIR$/k8s/Jenkinsfile" afterDir="false" />
-    </list>
+    <list default="true" id="64feb96e-5147-4cef-88d5-1dde19c466ed" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -31,6 +27,10 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="KubernetesApiPersistence">
+    <option name="context" value="juju-context" />
+    <option name="namespace" value="default" />
   </component>
   <component name="ProjectId" id="1jWCHrQEVOH0MiMOHsLddYnTAH6" />
   <component name="ProjectLevelVcsManager">
@@ -73,6 +73,7 @@
       <option name="presentableId" value="Default" />
       <updated>1603910378365</updated>
       <workItem from="1603910379802" duration="75939000" />
+      <workItem from="1605377259002" duration="679000" />
     </task>
     <servers />
   </component>
@@ -89,6 +90,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
     <state x="3192" y="-535" key="RollbackChangesDialog" timestamp="1604179737458">
