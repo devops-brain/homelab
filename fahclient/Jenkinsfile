@@ -4,17 +4,22 @@ pipeline {
   }
 
   stages {
-    stage('bootstrap tooling as needed'){
+    stage('add helm repo'){
       steps {
         echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
-        sh 'echo "TODO:  evaluate and run code below"'
-        echo 'helm repo add pcktdmp https://pcktdmp.github.io/charts'
+        sh 'helm repo add pcktdmp https://pcktdmp.github.io/charts || true'
       }
     }
     stage('deploy or update fahclient'){
       steps {
         echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
-        sh "cd fahclient; helm upgrade --install fahclient pcktdmp/fahclient -f values.yaml"
+        sh "cd fahclient; \
+              helm upgrade --install fahclient \
+              --set fahClient.user='devops-brain' \
+              --set fahClient.passkey='bf452005d6804cbdbf452005d6804cbd' \
+              --set fahClient.team='234679' \
+              --set replicaCount='3' \
+              pcktdmp/fahclient"
       }
     }
   }
