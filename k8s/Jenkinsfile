@@ -18,7 +18,7 @@ pipeline {
     stage('update juju deployment'){
       steps {
         echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
-        sh "cd k8s; juju deploy -m kube --map-machines=existing charmed-kubernetes --overlay changes.yaml"
+        sh "cd k8s; juju deploy -m kube --map-machines=existing cs:bundle/charmed-kubernetes-519 --overlay changes.yaml"
       }
     }
     stage('post-deployment config'){

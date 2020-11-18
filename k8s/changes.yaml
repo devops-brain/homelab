@@ -14,6 +14,8 @@ applications:
       - '4'
   kubernetes-master:
     num_units: 1
+    options:
+      allow-privileged: 'true'
     to:
       - '5'
   kubernetes-worker:
