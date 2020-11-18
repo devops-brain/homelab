@@ -4,22 +4,34 @@ pipeline {
   }
 
   stages {
-    stage('bootstrap resources as needed'){
+    stage('pull rook codebase'){
       steps {
         echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
-        sh 'cd ~/; pwd'
-        sh 'helm repo add rook-release https://charts.rook.io/release'
-        sh 'kubectl create namespace rook-ceph || true'
-        sh "#curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get | bash || true"
-        sh "#kubectl create serviceaccount tiller --namespace kube-system || true"
-        sh "#kubectl create clusterrolebinding tiller-cluster-rule --clusterrole=cluster-admin --serviceaccount=kube-system:tiller || true"
-        sh "#helm init --wait --service-account tiller || true"
+        sh 'git clone --single-branch --branch release-1.5 https://github.com/rook/rook.git'
       }
     }
-    stage('ceph with rook via helm'){
+    stage('deploy rook dependencies for operator'){
       steps {
         echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
-        sh "cd ceph; helm upgrade --install --namespace rook-ceph rook-ceph rook-release/rook-ceph -f values.yaml"
+        sh "ckubectl create -f rook/cluster/examples/kubernetes/ceph/crds.yaml -f rook/cluster/examples/kubernetes/ceph/common.yaml"
+      }
+    }
+    stage('deploy rook operator'){
+      steps {
+        echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+        sh "kubectl create -f rook/cluster/examples/kubernetes/ceph/operator.yaml"
+      }
+    }
+    stage('deploy ceph cluster through rook operator'){
+      steps {
+        echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+        sh "kubectl create -f rook/cluster/examples/kubernetes/ceph/cluster.yaml"
+      }
+    }
+    stage('deploy ceph into k8s as storageclass'){
+      steps {
+        echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+        sh "kubectl create -f rook/cluster/examples/kubernetes/ceph/csi/rbd/storageclass.yaml"
       }
     }
   }
