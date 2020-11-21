@@ -20,10 +20,10 @@ pipeline {
         echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
         sh "cd k8s; juju deploy -m kube --map-machines=existing cs:bundle/charmed-kubernetes-519 --overlay changes.yaml"
         echo "I'll need to test if the kubernetes-master charm switches to active prematurely, but this should block IO until the deployment is complete."
-        sh """until [ "active" in "\$(juju show-status kubernetes-master/0 | grep kubernetes-master/0 )" ]
+        sh """bash -c '''until [ "active" in "$(juju show-status kubernetes-master/0 | grep kubernetes-master/0 )" ]
               do
                 sleep 1m
-              done"""
+              done ''' """
       }
     }
     stage('post-deployment config'){
