@@ -13,25 +13,25 @@ pipeline {
     stage('deploy rook dependencies for operator'){
       steps {
         echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
-        sh "ckubectl create -f rook/cluster/examples/kubernetes/ceph/crds.yaml -f rook/cluster/examples/kubernetes/ceph/common.yaml"
+        sh "kubectl apply -f rook/cluster/examples/kubernetes/ceph/crds.yaml -f rook/cluster/examples/kubernetes/ceph/common.yaml"
       }
     }
     stage('deploy rook operator'){
       steps {
         echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
-        sh "kubectl create -f rook/cluster/examples/kubernetes/ceph/operator.yaml"
+        sh "kubectl apply -f rook/cluster/examples/kubernetes/ceph/operator.yaml"
       }
     }
     stage('deploy ceph cluster through rook operator'){
       steps {
         echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
-        sh "kubectl create -f rook/cluster/examples/kubernetes/ceph/cluster.yaml"
+        sh "kubectl apply -f rook/cluster/examples/kubernetes/ceph/cluster.yaml"
       }
     }
     stage('deploy ceph into k8s as storageclass'){
       steps {
         echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
-        sh "kubectl create -f rook/cluster/examples/kubernetes/ceph/csi/rbd/storageclass.yaml"
+        sh "kubectl apply -f rook/cluster/examples/kubernetes/ceph/csi/rbd/storageclass.yaml"
       }
     }
   }
