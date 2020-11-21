@@ -1,6 +1,6 @@
 pipeline {
   agent {
-    label "saltmaster"
+    label "kubectl"
   }
 
   stages {

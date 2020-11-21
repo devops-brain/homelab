@@ -1,6 +1,6 @@
 pipeline {
   agent {
-    label "saltmaster"
+    label "kubectl"
   }
 
   stages {
@@ -19,13 +19,14 @@ pipeline {
       steps {
         echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
         sh "cd k8s; juju deploy -m kube --map-machines=existing cs:bundle/charmed-kubernetes-519 --overlay changes.yaml"
+        echo "I'll need to test if the kubernetes-master charm switches to active prematurely, but this should block IO until the deployment is complete."
+        sh """until [ "$(juju show-status kubernetes-master/0 | grep kubernetes-master/0 | awk '{print $2}')" = "active" ]; do sleep 1m; done"""
       }
     }
     stage('post-deployment config'){
       steps {
         echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
-        echo "This may fail on first run until we can block until previous stage is applied, not just declared."
-        sh "sleep 60m"
+        echo "TODO:  make this idempotent, remove rm command and use a force on the copy"
         sh "juju scp kubernetes-master/0:config ~/.kube/config"
         sh "rm -fv /home/ubuntu/.kube/config"
         sh "cp /root/.kube/config /home/ubuntu/.kube/"
