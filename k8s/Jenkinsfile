@@ -24,7 +24,8 @@ pipeline {
     stage('post-deployment config'){
       steps {
         echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
-        echo "This will fail on first run until we can block until previous stage is applied, not just declared."
+        echo "This may fail on first run until we can block until previous stage is applied, not just declared."
+        sh "sleep 60m"
         sh "juju scp kubernetes-master/0:config ~/.kube/config"
         sh "rm -fv /home/ubuntu/.kube/config"
         sh "cp /root/.kube/config /home/ubuntu/.kube/"
