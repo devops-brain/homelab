@@ -28,16 +28,16 @@ pipeline {
         sh "kubectl apply -f rook/cluster/examples/kubernetes/ceph/cluster.yaml"
       }
     }
-    stage('deploy ceph into k8s as storageclass'){
+    stage('deploy ceph storageclass into k8s with replication'){
       steps {
         echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
         sh "kubectl apply -f rook/cluster/examples/kubernetes/ceph/csi/rbd/storageclass.yaml"
       }
     }
-    stage('deploy ceph pvc into k8s'){
+    stage('deploy ceph snapshots into k8s'){
       steps {
         echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
-        sh "kubectl apply -f rook/cluster/examples/kubernetes/ceph/csi/rbd/pvc.yaml"
+        sh "kubectl apply -f rook/cluster/examples/kubernetes/ceph/csi/rbd/snapshotclass.yaml"
       }
     }
     stage('deploy ceph toolbox'){
