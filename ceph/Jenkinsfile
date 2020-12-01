@@ -34,6 +34,12 @@ pipeline {
         sh "kubectl apply -f rook/cluster/examples/kubernetes/ceph/csi/rbd/storageclass.yaml"
       }
     }
+    stage('deploy ceph pvc into k8s'){
+      steps {
+        echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+        sh "kubectl apply -f rook/cluster/examples/kubernetes/ceph/csi/rbd/pvc.yaml"
+      }
+    }
     stage('deploy ceph toolbox'){
       steps {
         echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
