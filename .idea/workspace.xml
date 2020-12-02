@@ -21,7 +21,6 @@
   <component name="ChangeListManager">
     <list default="true" id="64feb96e-5147-4cef-88d5-1dde19c466ed" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ceph/Jenkinsfile" beforeDir="false" afterPath="$PROJECT_DIR$/ceph/Jenkinsfile" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,7 +78,7 @@
       <workItem from="1605377259002" duration="679000" />
       <workItem from="1605669168291" duration="5112000" />
       <workItem from="1605987717357" duration="10300000" />
-      <workItem from="1606538690433" duration="1424000" />
+      <workItem from="1606538690433" duration="3282000" />
     </task>
     <servers />
   </component>
