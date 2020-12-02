@@ -13,37 +13,37 @@ pipeline {
     stage('deploy rook dependencies for operator'){
       steps {
         echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
-        sh "kubectl apply -f rook/cluster/examples/kubernetes/ceph/crds.yaml -f rook/cluster/examples/kubernetes/ceph/common.yaml"
+        sh "kubectl apply -f rook/cluster/examples/kubernetes/ceph/crds.yaml -f rook/cluster/examples/kubernetes/ceph/common.yaml --wait=true"
       }
     }
     stage('deploy rook operator'){
       steps {
         echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
-        sh "kubectl apply -f rook/cluster/examples/kubernetes/ceph/operator.yaml"
+        sh "kubectl apply -f rook/cluster/examples/kubernetes/ceph/operator.yaml --wait=true"
       }
     }
     stage('deploy ceph cluster through rook operator'){
       steps {
         echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
-        sh "kubectl apply -f rook/cluster/examples/kubernetes/ceph/cluster.yaml"
+        sh "kubectl apply -f rook/cluster/examples/kubernetes/ceph/cluster.yaml --wait=true"
       }
     }
     stage('deploy ceph storageclass into k8s with replication'){
       steps {
         echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
-        sh "kubectl apply -f rook/cluster/examples/kubernetes/ceph/csi/rbd/storageclass.yaml"
+        sh "kubectl apply -f rook/cluster/examples/kubernetes/ceph/csi/rbd/storageclass.yaml --wait=true"
       }
     }
     stage('deploy ceph snapshots into k8s'){
       steps {
         echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
-        sh "kubectl apply -f rook/cluster/examples/kubernetes/ceph/csi/rbd/snapshotclass.yaml"
+        sh "kubectl apply -f rook/cluster/examples/kubernetes/ceph/csi/rbd/snapshotclass.yaml --wait=true"
       }
     }
     stage('deploy ceph toolbox'){
       steps {
         echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
-        sh "kubectl apply -f rook/cluster/examples/kubernetes/ceph/toolbox.yaml"
+        sh "kubectl apply -f rook/cluster/examples/kubernetes/ceph/toolbox.yaml --wait=true"
       }
     }
   }
