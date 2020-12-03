@@ -37,7 +37,7 @@ pipeline {
     stage('deploy ceph snapshots into k8s'){
       steps {
         echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
-        sh "kubectl apply -f rook/cluster/examples/kubernetes/ceph/csi/rbd/snapshotclass.yaml --wait=true"
+        sh "#kubectl apply -f rook/cluster/examples/kubernetes/ceph/csi/rbd/snapshotclass.yaml --wait=true"
       }
     }
     stage('deploy ceph toolbox'){
