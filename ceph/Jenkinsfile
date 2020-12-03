@@ -25,7 +25,7 @@ pipeline {
     stage('deploy ceph cluster through rook operator'){
       steps {
         echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
-        sh "kubectl apply -f rook-cluster/cluster.yaml --wait=true"
+        sh "kubectl apply -f ceph/rook-cluster/cluster.yaml --wait=true"
       }
     }
     stage('deploy ceph storageclass into k8s with replication'){
