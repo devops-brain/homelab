@@ -1,6 +1,0 @@
-fahClient:
-  user: 'devops-brain'
-  passkey: 'replace_with_jenkins_secret'
-  team: '234679'
-
-replicaCount: '3'

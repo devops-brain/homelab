@@ -1,0 +1,57 @@
+
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: folding-at-home
+  namespace: folding-at-home
+  labels:
+    application: folding-at-home
+spec:
+  selector:
+    matchLabels:
+      application: folding-at-home
+  template:
+    metadata:
+      labels:
+        application: folding-at-home
+    spec:
+      containers:
+        - name: fahclient
+          image: foldingathome/fah-gpu:latest
+          env:
+            - name: USER
+              value: "devops-brain"
+            - name: PASSKEY
+              value: "TODO"
+            - name: POWER
+              value: "full"
+            - name: TEAM
+              value: "234679"
+            - name: NODE_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
+          volumeMounts:
+            - name: fahclient
+              mountPath: /fah
+              subPathExpr: $(NODE_NAME)
+          ports:
+            - containerPort: 7396
+          readinessProbe:
+            httpGet:
+              path: /favicon.ico
+              port: 7396
+          resources:
+            limits:
+              memory: 4Gi
+            requests:
+              cpu: 6000m
+              memory: 200Mi
+          securityContext:
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            runAsUser: 1000
+      volumes:
+        - name: fahclient
+          emptyDir: {}
+

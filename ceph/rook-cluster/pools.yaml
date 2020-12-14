@@ -1,0 +1,30 @@
+apiVersion: ceph.rook.io/v1
+kind: CephBlockPool
+metadata:
+  name: iopool
+  namespace: rook-ceph
+spec:
+  # https://rook.io/docs/rook/v1.5/ceph-pool-crd.html
+  failureDomain: host
+  replicated:
+    size: 3
+    # do not remove idiot proofing in following line...
+    requireSafeReplicaSize: true
+  deviceClass: ssd,nvme
+  #mirroring:
+  #  enabled: true
+  #  mode: image
+  #    snapshotSchedules:
+  #      interval: 1h
+---
+apiVersion: ceph.rook.io/v1
+kind: CephBlockPool
+metadata:
+  name: bulkpool
+  namespace: rook-ceph
+spec:
+  failureDomain: host
+  erasureCoded:
+    dataChunks: 2
+    codingChunks: 1
+  deviceClass: hdd

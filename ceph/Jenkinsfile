@@ -28,19 +28,43 @@ pipeline {
         sh "kubectl apply -f ceph/rook-cluster/cluster.yaml --wait=true"
       }
     }
-    stage('deploy ceph storageclass into k8s with replication'){
+    stage('deploy ceph pools'){
       steps {
         echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
-        sh "kubectl apply -f rook/cluster/examples/kubernetes/ceph/csi/rbd/storageclass.yaml --wait=true"
+        sh "kubectl apply -f ceph/rook-cluster/pools.yaml --wait=true"
       }
     }
-    stage('deploy ceph snapshots into k8s'){
+    stage('deploy ceph as k8s csi storageclass for rbd and shared fs'){
+      steps {
+        echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+        sh "kubectl apply -f ceph/rook-cluster/csi-storageclass.yaml --wait=true"
+      }
+    }
+    stage('deploy ceph snapshots into k8s rbd'){
       steps {
         echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
         sh "#kubectl apply -f rook/cluster/examples/kubernetes/ceph/csi/rbd/snapshotclass.yaml --wait=true"
       }
     }
+    stage('deploy ceph snapshots into k8s fs'){
+      steps {
+        echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+        sh "#kubectl apply -f rook/cluster/examples/kubernetes/ceph/csi/cephfs/snapshotclass.yaml --wait=true"
+      }
+    }
     stage('deploy ceph toolbox'){
+      steps {
+        echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+        sh "kubectl apply -f rook/cluster/examples/kubernetes/ceph/toolbox.yaml --wait=true"
+      }
+    }
+    stage('deploy mysql example to verify storage config is functional'){
+      steps {
+        echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+        sh "kubectl apply -f rook/cluster/examples/kubernetes/ceph/toolbox.yaml --wait=true"
+      }
+    }
+    stage('deploy wordpress example to verify storage config is functional'){
       steps {
         echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
         sh "kubectl apply -f rook/cluster/examples/kubernetes/ceph/toolbox.yaml --wait=true"
