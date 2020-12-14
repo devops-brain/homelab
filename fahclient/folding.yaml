@@ -24,7 +24,7 @@ spec:
             - name: PASSKEY
               value: "TODO"
             - name: POWER
-              value: "full"
+              value: "light"
             - name: TEAM
               value: "234679"
             - name: NODE_NAME
