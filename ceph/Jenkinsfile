@@ -61,13 +61,13 @@ pipeline {
     stage('deploy mysql example to verify storage config is functional'){
       steps {
         echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
-        sh "kubectl apply -f rook/cluster/examples/kubernetes/ceph/toolbox.yaml --wait=true"
+        sh "kubectl apply -f rook/cluster/examples/kubernetes/mysql.yaml --wait=true"
       }
     }
     stage('deploy wordpress example to verify storage config is functional'){
       steps {
         echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
-        sh "kubectl apply -f rook/cluster/examples/kubernetes/ceph/toolbox.yaml --wait=true"
+        sh "kubectl apply -f rook/cluster/examples/kubernetes/wordpress.yaml --wait=true"
       }
     }
   }
