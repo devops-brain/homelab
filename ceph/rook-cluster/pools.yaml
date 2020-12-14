@@ -10,7 +10,7 @@ spec:
     size: 3
     # do not remove idiot proofing in following line...
     requireSafeReplicaSize: true
-  deviceClass: ssd,nvme
+  deviceClass: ssd
   #mirroring:
   #  enabled: true
   #  mode: image
