@@ -27,6 +27,7 @@ pipeline {
       steps {
         echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
         echo "TODO:  make this idempotent, remove rm command and use a force on the copy"
+        sh "mkdir -p ~/.kube"
         sh "juju scp kubernetes-master/0:config ~/.kube/config"
         sh "rm -fv /home/ubuntu/.kube/config"
         sh "cp /root/.kube/config /home/ubuntu/.kube/"
