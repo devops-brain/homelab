@@ -37,7 +37,7 @@ spec:
     spec:
       containers:
         - name: fahclient
-          image: foldingathome/fah-gpu:latest
+          image: gokulpch/fah:7.5
           env:
             - name: USER
               value: "devops-brain"
