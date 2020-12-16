@@ -30,7 +30,9 @@ pipeline {
         sh "mkdir -p ~/.kube"
         sh "juju scp kubernetes-master/0:config ~/.kube/config"
         sh "rm -fv /home/ubuntu/.kube/config"
+        sh "mkdir -p /home/ubuntu/.kube"
         sh "cp /root/.kube/config /home/ubuntu/.kube/"
+        sh "chown ubuntu /home/ubuntu/.kube"
         sh "chown ubuntu /home/ubuntu/.kube/config"
       }
     }
