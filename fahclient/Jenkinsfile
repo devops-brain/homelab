@@ -4,22 +4,10 @@ pipeline {
   }
 
   stages {
-    stage('add helm repo'){
+    stage('deploy folding at home daemonset and pvc'){
       steps {
         echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
-        sh 'helm repo add pcktdmp https://pcktdmp.github.io/charts || true'
-      }
-    }
-    stage('deploy or update fahclient'){
-      steps {
-        echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
-        sh "cd fahclient; \
-              helm upgrade --install fahclient \
-              --set fahClient.user='devops-brain' \
-              --set fahClient.passkey='bf452005d6804cbdbf452005d6804cbd' \
-              --set fahClient.team='234679' \
-              --set replicaCount='3' \
-              pcktdmp/fahclient"
+        sh "kubectl apply -f fahclient/folding.yaml --wait=true"
       }
     }
   }
