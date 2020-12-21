@@ -20,7 +20,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="64feb96e-5147-4cef-88d5-1dde19c466ed" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/plex/plex.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/plex/plex.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

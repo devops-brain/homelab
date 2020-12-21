@@ -43,14 +43,19 @@ metadata:
   namespace: plex
   labels:
     application: plex
+    tier: frontend
 spec:
   selector:
     matchLabels:
       application: plex
+      tier: frontend
+  strategy:
+    type: Recreate
   template:
     metadata:
       labels:
         application: plex
+        tier: frontend
     spec:
       containers:
         - name: badwolf
@@ -60,6 +65,9 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: spec.nodeName
+          ports:
+            - containerPort: 32400
+              name: plex
           volumeMounts:
             - name: plexconfig
               mountPath: /config
