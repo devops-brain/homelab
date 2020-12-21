@@ -18,7 +18,7 @@ spec:
     - port: 32400
   selector:
     app: plex
-    tier: frontend
+    #tier: frontend
   type: LoadBalancer
 ---
 apiVersion: v1
@@ -43,19 +43,19 @@ metadata:
   namespace: plex
   labels:
     application: plex
-    tier: frontend
+    #tier: frontend
 spec:
   selector:
     matchLabels:
       application: plex
-      tier: frontend
+      #tier: frontend
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
         application: plex
-        tier: frontend
+        #tier: frontend
     spec:
       containers:
         - name: badwolf
