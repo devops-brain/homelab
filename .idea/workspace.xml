@@ -20,9 +20,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="64feb96e-5147-4cef-88d5-1dde19c466ed" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/plex/Jenkinsfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plex/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plex/plex.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fahclient/Jenkinsfile" beforeDir="false" afterPath="$PROJECT_DIR$/fahclient/Jenkinsfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fahclient/folding.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/fahclient/folding.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,7 +49,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/ceph/rook-cluster" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -58,10 +59,10 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/ceph/rook-cluster" />
       <recent name="$PROJECT_DIR$/fahclient" />
       <recent name="$PROJECT_DIR$/ceph" />
-      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/k8s/juju" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -113,11 +114,5 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="3192" y="-535" key="RollbackChangesDialog" timestamp="1604179737458">
-      <screen x="1440" y="-1313" width="3840" height="2137" />
-    </state>
-    <state x="3192" y="-535" key="RollbackChangesDialog/1440.-1313.3840.2137/1473.-3473.3840.2137/0.23.1440.877@1440.-1313.3840.2137" timestamp="1604179737458" />
   </component>
 </project>

@@ -1,0 +1,78 @@
+
+
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: plex
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: plex
+  labels:
+    app: plex
+spec:
+  ports:
+    - port: 32400
+  selector:
+    app: plex
+    tier: frontend
+  type: LoadBalancer
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: plexpvc
+  namespace: plex
+  labels:
+    app: plex
+spec:
+  storageClassName: rook-ceph-block
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 20Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: plex
+  namespace: plex
+  labels:
+    application: plex
+spec:
+  selector:
+    matchLabels:
+      application: plex
+  template:
+    metadata:
+      labels:
+        application: plex
+    spec:
+      containers:
+        - name: badwolf
+          image: plexinc/pms-docker:plexpass
+          env:
+            - name: NODE_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
+          volumeMounts:
+            - name: plexconfig
+              mountPath: /config
+          resources:
+            requests:
+              cpu: 6000m
+              memory: 4Gi
+          securityContext:
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            runAsUser: 1000
+      volumes:
+        - name: plexconfig
+          persistentVolumeClaim:
+            claimName: plexpvc
+            readOnly: false
+
