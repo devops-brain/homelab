@@ -25,6 +25,8 @@ applications:
       - '5'
   kubernetes-worker:
     num_units: 3
+    options:
+      ingress: 'true'
     to:
       - '0'
       - '1'
