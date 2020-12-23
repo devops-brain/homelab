@@ -1,6 +1,4 @@
 
-
-
 apiVersion: v1
 kind: Namespace
 metadata:
@@ -18,13 +16,13 @@ spec:
     - port: 32400
   selector:
     app: plex
-    #tier: frontend
+    tier: frontend
   type: LoadBalancer
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: plexpvc
+  name: plexvc
   namespace: plex
   labels:
     app: plex
@@ -42,24 +40,24 @@ metadata:
   name: plex
   namespace: plex
   labels:
-    application: plex
-    #tier: frontend
+    app: plex
+    tier: frontend
 spec:
   selector:
     matchLabels:
-      application: plex
-      #tier: frontend
+      app: plex
+      tier: frontend
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        application: plex
-        #tier: frontend
+        app: plex
+        tier: frontend
     spec:
       containers:
-        - name: badwolf
-          image: plexinc/pms-docker:plexpass
+        - image: plexinc/pms-docker:plexpass
+          name: plex
           env:
             - name: NODE_NAME
               valueFrom:
@@ -71,17 +69,7 @@ spec:
           volumeMounts:
             - name: plexconfig
               mountPath: /config
-          resources:
-            requests:
-              cpu: 6000m
-              memory: 4Gi
-          securityContext:
-            readOnlyRootFilesystem: true
-            runAsNonRoot: true
-            runAsUser: 1000
       volumes:
         - name: plexconfig
           persistentVolumeClaim:
-            claimName: plexpvc
-            readOnly: false
-
+            claimName: plexvc
