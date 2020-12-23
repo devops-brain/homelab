@@ -15,8 +15,7 @@ applications:
       - '4'
   kubernetes-master:
     # this is not redundant as the charm defaults to
-    # but in a homelab the impact is acceptable as running services continue until master is restored
-    # only the first three hosts are bare metal, the rest are in a single kvm host...
+    # but only the first three hosts are bare metal, the rest are in a single kvm host...
     # so adding a second node would not add real redundancy
     num_units: 1
     options:
