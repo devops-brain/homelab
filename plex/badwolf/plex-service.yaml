@@ -14,6 +14,46 @@ spec:
       port: 32400
       protocol: TCP
       targetPort: 32400
+    - name: plex2
+      nodePort: 3005
+      port: 3005
+      protocol: TCP
+      targetPort: 3005
+    - name: plex3
+      nodePort: 8324
+      port: 8324
+      protocol: TCP
+      targetPort: 8324
+    - name: plex4
+      nodePort: 32469
+      port: 32469
+      protocol: TCP
+      targetPort: 32469
+    - name: plex5
+      nodePort: 1900
+      port: 1900
+      protocol: TCP
+      targetPort: 1900
+    - name: plex10
+      nodePort: 32410
+      port: 32410
+      protocol: TCP
+      targetPort: 32410
+    - name: plex12
+      nodePort: 32412
+      port: 32412
+      protocol: TCP
+      targetPort: 32412
+    - name: plex13
+      nodePort: 32413
+      port: 32413
+      protocol: TCP
+      targetPort: 32413
+    - name: plex14
+      nodePort: 32414
+      port: 32414
+      protocol: TCP
+      targetPort: 32414
   selector:
     app: plex
     tier: frontend
