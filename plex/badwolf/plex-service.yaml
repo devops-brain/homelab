@@ -1,0 +1,21 @@
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: plex
+  namespace: plex
+  labels:
+    app: plex
+spec:
+  ports:
+    - name: plex
+      nodePort: 32400
+      port: 32400
+      protocol: TCP
+      targetPort: 32400
+  selector:
+    app: plex
+    tier: frontend
+  type: LoadBalancer
+

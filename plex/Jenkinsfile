@@ -7,7 +7,11 @@ pipeline {
     stage('deploy plex and dependent services'){
       steps {
         echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
-        sh "kubectl apply -f plex/plex.yaml --wait=true"
+        sh "kubectl apply -f plex/badwolf/plex-namespace.yaml \
+                          -f plex/badwolf/plex-pvc.yaml \
+                          -f plex/badwolf/plex-service.yaml \
+                          -f plex/badwolf/plex-ingress.yaml \
+                          -f plex/badwolf/plex-deployment.yaml --wait=true"
       }
     }
   }
