@@ -14,6 +14,7 @@ metadata:
 spec:
   ports:
     - port: 32400
+      targetPort: 32400
   selector:
     app: plex
     tier: frontend
