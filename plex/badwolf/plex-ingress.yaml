@@ -12,7 +12,7 @@ spec:
   #      - plex.khoyi.io
   #    secretName: plex-cert
   rules:
-    - host: plex.khoyi.io
+    - host: badwolf.khoyi.io
       http:
         paths:
           - path: /
