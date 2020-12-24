@@ -19,7 +19,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="64feb96e-5147-4cef-88d5-1dde19c466ed" name="Default Changelist" comment="" />
+    <list default="true" id="64feb96e-5147-4cef-88d5-1dde19c466ed" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/plex/badwolf/plex-ingress.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/plex/badwolf/plex-ingress.yaml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -95,7 +97,7 @@
       <workItem from="1605987717357" duration="10300000" />
       <workItem from="1606538690433" duration="14003000" />
       <workItem from="1607312483730" duration="32000000" />
-      <workItem from="1608763074060" duration="5114000" />
+      <workItem from="1608763074060" duration="5512000" />
     </task>
     <servers />
   </component>
