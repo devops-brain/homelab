@@ -1,0 +1,14 @@
+pipeline {
+  agent {
+    label "saltmaster"
+  }
+
+  stages {
+    stage('deploy plex and dependent services'){
+      steps {
+        echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+        sh "kubectl apply -f ingress/ingress.yaml --wait=true"
+      }
+    }
+  }
+}
