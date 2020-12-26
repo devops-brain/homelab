@@ -57,5 +57,5 @@ spec:
   selector:
     app: plex
     tier: frontend
-  type: LoadBalancer
+  type: NodePort
 
