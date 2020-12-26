@@ -13,6 +13,7 @@ spec:
   #    secretName: plex-cert
   backend:
     serviceName: plex
+    servicePort: 32400
   rules:
     - host: badwolf.khoyi.io
       http:
