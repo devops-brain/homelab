@@ -8,7 +8,7 @@ pipeline {
       steps {
         echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
         sh "kubectl apply -f ingress/yaml/namespace.yaml \
-                          -f ingress/yaml/ingress.yaml--wait=true"
+                          -f ingress/yaml/ingress.yaml --wait=true"
       }
     }
   }
