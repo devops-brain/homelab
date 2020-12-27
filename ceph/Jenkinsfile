@@ -43,7 +43,7 @@ pipeline {
     stage('deploy demo environment'){
       steps {
         echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
-        sh "kubectl apply -f ceph/demo/mysql.yaml \
+        sh "#kubectl apply -f ceph/demo/mysql.yaml \
                           -f ceph/demo/wordpress.yaml --wait=true"
       }
     }
