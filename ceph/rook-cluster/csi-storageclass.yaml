@@ -24,7 +24,7 @@ reclaimPolicy: Delete
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
-  name: rook-ceph-cephfs
+  name: rook-cephfs
 provisioner: rook-ceph.cephfs.csi.ceph.com # driver:namespace:operator
 parameters:
   clusterID: rook-ceph
