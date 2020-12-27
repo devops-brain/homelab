@@ -23,6 +23,7 @@ pipeline {
         echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
         sh "kubectl apply -f ceph/rook-cluster/cluster.yaml \
                           -f ceph/rook-cluster/pools.yaml \
+                          -f ceph/rook-cluster/filesystem.yaml \
                           -f ceph/rook-cluster/csi-storageclass.yaml --wait=true"
       }
     }
