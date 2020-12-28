@@ -29,7 +29,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: Koi-Pond
+  name: koi-pond
 spec:
   accessModes:
     - ReadWriteMany
@@ -41,7 +41,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: Rose-Garden
+  name: rose-garden
 spec:
   accessModes:
     - ReadWriteMany
@@ -53,7 +53,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: Dragons-Den
+  name: dragons-den
 spec:
   accessModes:
     - ReadWriteMany
@@ -65,7 +65,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: Donna-Collection
+  name: donna-collection
 spec:
   accessModes:
     - ReadWriteMany
@@ -77,7 +77,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: Roger-Roger
+  name: roger-roger
 spec:
   accessModes:
     - ReadWriteMany
