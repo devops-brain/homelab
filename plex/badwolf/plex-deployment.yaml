@@ -38,7 +38,7 @@ spec:
             - name: plexmedia-symlinks
               mountPath: /media
             - name: koi-pond
-              mountPath: /srv
+              mountPath: /srv/koi-pond
       volumes:
         - name: plexconfig
           persistentVolumeClaim:
