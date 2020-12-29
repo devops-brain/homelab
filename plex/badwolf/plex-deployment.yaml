@@ -42,10 +42,12 @@ spec:
       volumes:
         - name: plexconfig
           persistentVolumeClaim:
-            claimName: plexvc
+            claimName: plexconfig
         - name: plexmedia-symlinks
           persistentVolumeClaim:
             claimName: plexmedia-symlinks
+            readOnly: false
         - name: koi-pond
           persistentVolumeClaim:
             claimName: koi-pond
+            readOnly: false
