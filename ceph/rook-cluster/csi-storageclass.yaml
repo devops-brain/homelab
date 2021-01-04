@@ -40,6 +40,3 @@ parameters:
   csi.storage.k8s.io/node-stage-secret-namespace: rook-ceph # namespace:cluster
 reclaimPolicy: Delete
 allowVolumeExpansion: true
-mountOptions:
-# uncomment the following line for debugging
-#- debug
