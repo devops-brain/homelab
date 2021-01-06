@@ -27,7 +27,7 @@ metadata:
   name: rook-cephfs
 provisioner: rook-ceph.cephfs.csi.ceph.com # driver:namespace:operator
 parameters:
-  clusterID: rook-cephfs
+  clusterID: rook-ceph
   fsName: cephfs
   pool: bulkpool
   # The secrets contain Ceph admin credentials. These are generated automatically by the operator
