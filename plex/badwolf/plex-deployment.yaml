@@ -35,19 +35,7 @@ spec:
           volumeMounts:
             - name: plexconfig
               mountPath: /config
-            - name: plexmedia-symlinks
-              mountPath: /media
-            - name: koi-pond
-              mountPath: /srv/koi-pond
       volumes:
         - name: plexconfig
           persistentVolumeClaim:
             claimName: plexconfig
-        - name: plexmedia-symlinks
-          persistentVolumeClaim:
-            claimName: plexmedia-symlinks
-            readOnly: false
-        - name: koi-pond
-          persistentVolumeClaim:
-            claimName: koi-pond
-            readOnly: false

@@ -17,21 +17,6 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: plexmedia-symlinks
-  namespace: plex
-  labels:
-    app: plex
-spec:
-  accessModes:
-    - ReadWriteMany
-  resources:
-    requests:
-      storage: 2Gi
-  storageClassName: rook-cephfs
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
   name: koi-pond
   namespace: plex
   labels:
