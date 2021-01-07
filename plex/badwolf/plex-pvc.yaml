@@ -23,8 +23,8 @@ metadata:
     app: plex
 spec:
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   resources:
     requests:
-      storage: 20Gi
+      storage: 2Gi
   storageClassName: rook-cephfs

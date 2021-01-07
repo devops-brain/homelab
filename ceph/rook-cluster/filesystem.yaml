@@ -10,8 +10,8 @@ spec:
     replicated:
       size: 3
       requireSafeReplicaSize: true
-    # class: nvme
-    class: ssd
+    # deviceClass: nvme
+    deviceClass: ssd
     parameters:
       compression_mode: none
   dataPools:
