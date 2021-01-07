@@ -23,7 +23,7 @@ metadata:
     app: plex
 spec:
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
   resources:
     requests:
       storage: 20Ti
