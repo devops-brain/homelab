@@ -35,7 +35,13 @@ spec:
           volumeMounts:
             - name: plexconfig
               mountPath: /config
+            - name: plexmedia-symlinks
+              mountPath: /media
       volumes:
         - name: plexconfig
           persistentVolumeClaim:
             claimName: plexconfig
+        - name: plexmedia-symlinks
+          persistentVolumeClaim:
+            claimName: plexmedia-symlinks
+            readOnly: false
