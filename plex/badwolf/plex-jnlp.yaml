@@ -1,0 +1,78 @@
+
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: plex-jnlp
+  namespace: plex
+  labels:
+    app: plex-jnlp
+    tier: frontend
+spec:
+  selector:
+    matchLabels:
+      app: plex-jnlp
+      tier: frontend
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: plex-jnlp
+        tier: frontend
+    spec:
+      containers:
+        - image: khoyi/jnlp-slave:latest
+          name: jnlp
+          ## TODO:  add entrypoint
+          env:
+            - name: NODE_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
+          ports:
+            - containerPort: 32400
+              name: plex
+          volumeMounts:
+            - name: plexconfig
+              mountPath: /config
+            - name: plexmedia-symlinks
+              mountPath: /media
+            - name: koi-pond
+              mountPath: /srv/masters_koi-pond
+            - name: rose-garden
+              mountPath: /srv/masters_rose-garden
+            - name: dragons-den
+              mountPath: /srv/masters_dragons-den
+            - name: donna-collection
+              mountPath: /srv/masters_donna-collection
+            - name: roger-roger
+              mountPath: /srv/masters_roger-roger
+      volumes:
+        - name: plexconfig
+          persistentVolumeClaim:
+            claimName: plexconfig
+        - name: plexmedia-symlinks
+          persistentVolumeClaim:
+            claimName: plexmedia-symlinks
+            readOnly: false
+        - name: koi-pond
+          persistentVolumeClaim:
+            claimName: koi-pond
+            readOnly: true
+        - name: rose-garden
+          persistentVolumeClaim:
+            claimName: rose-garden
+            readOnly: true
+        - name: dragons-den
+          persistentVolumeClaim:
+            claimName: dragons-den
+            readOnly: true
+        - name: donna-collection
+          persistentVolumeClaim:
+            claimName: donna-collection
+            readOnly: true
+        - name: roger-roger
+          persistentVolumeClaim:
+            claimName: roger-roger
+            readOnly: true

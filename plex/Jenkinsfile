@@ -10,7 +10,7 @@ pipeline {
         sh "kubectl apply -f plex/badwolf/plex-namespace.yaml \
                           -f plex/badwolf/plex-pvc.yaml \
                           -f plex/badwolf/plex-service.yaml \
-                          -f plex/badwolf/plex-deployment.yaml --wait=true"
+                          -f plex/badwolf/plex-mediaserver.yaml --wait=true"
       }
     }
   }
