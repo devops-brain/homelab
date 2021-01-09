@@ -37,6 +37,16 @@ spec:
               mountPath: /config
             - name: plexmedia-symlinks
               mountPath: /media
+            - name: koi-pond
+              mountPath: /srv/masters_koi-pond
+            - name: rose-garden
+              mountPath: /srv/masters_rose-garden
+            - name: dragons-den
+              mountPath: /srv/masters_dragons-den
+            - name: donna-collection
+              mountPath: /srv/masters_donna-collection
+            - name: roger-roger
+              mountPath: /srv/masters_roger-roger
       volumes:
         - name: plexconfig
           persistentVolumeClaim:
@@ -45,3 +55,23 @@ spec:
           persistentVolumeClaim:
             claimName: plexmedia-symlinks
             readOnly: false
+        - name: koi-pond
+          persistentVolumeClaim:
+            claimName: koi-pond
+            readOnly: true
+        - name: rose-garden
+          persistentVolumeClaim:
+            claimName: rose-garden
+            readOnly: true
+        - name: dragons-den
+          persistentVolumeClaim:
+            claimName: dragons-den
+            readOnly: true
+        - name: donna-collection
+          persistentVolumeClaim:
+            claimName: donna-collection
+            readOnly: true
+        - name: roger-roger
+          persistentVolumeClaim:
+            claimName: roger-roger
+            readOnly: true

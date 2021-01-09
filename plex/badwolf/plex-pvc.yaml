@@ -28,3 +28,78 @@ spec:
     requests:
       storage: 2Gi
   storageClassName: rook-cephfs
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: koi-pond
+  namespace: plex
+  labels:
+    app: plex
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 20Ti
+  storageClassName: rook-cephfs
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: rose-garden
+  namespace: plex
+  labels:
+    app: plex
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 20Ti
+  storageClassName: rook-cephfs
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: dragons-den
+  namespace: plex
+  labels:
+    app: plex
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 20Ti
+  storageClassName: rook-cephfs
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: donna-collection
+  namespace: plex
+  labels:
+    app: plex
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 20Ti
+  storageClassName: rook-cephfs
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: roger-roger
+  namespace: plex
+  labels:
+    app: plex
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 20Ti
+  storageClassName: rook-cephfs
