@@ -29,7 +29,7 @@ provisioner: rook-ceph.cephfs.csi.ceph.com
 parameters:
   clusterID: rook-ceph
   fsName: cephfs
-  pool: bulkpool
+  pool: cephfs-data0
   # The secrets contain Ceph admin credentials. These are generated automatically by the operator
   # in the same namespace as the cluster.
   csi.storage.k8s.io/provisioner-secret-name: rook-csi-cephfs-provisioner
