@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 
-
+## TODO:  use better parsing to check that all charms are active/idle
 for i in `seq 1 60`
 do
   sleep 1s

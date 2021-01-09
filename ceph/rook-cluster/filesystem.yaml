@@ -7,14 +7,14 @@ metadata:
 spec:
   # The metadata pool spec. Must use replication.
   metadataPool:
-    - failureDomain: host
-      replicated:
-        size: 3
-        requireSafeReplicaSize: true
-      # deviceClass: nvme
-      deviceClass: ssd
-      parameters:
-        compression_mode: none
+    failureDomain: host
+    replicated:
+      size: 3
+      requireSafeReplicaSize: true
+    # deviceClass: nvme
+    deviceClass: ssd
+    parameters:
+      compression_mode: none
   dataPools:
     - failureDomain: host
       #erasureCoded:
