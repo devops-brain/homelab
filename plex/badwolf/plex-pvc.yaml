@@ -26,7 +26,7 @@ spec:
     - ReadWriteMany
   resources:
     requests:
-      storage: 2Gi
+      storage: 4Gi
   storageClassName: rook-cephfs
 ---
 apiVersion: v1
@@ -41,7 +41,7 @@ spec:
     - ReadWriteMany
   resources:
     requests:
-      storage: 20Ti
+      storage: 40Ti
   storageClassName: rook-cephfs
 ---
 apiVersion: v1
@@ -56,7 +56,7 @@ spec:
     - ReadWriteMany
   resources:
     requests:
-      storage: 20Ti
+      storage: 40Ti
   storageClassName: rook-cephfs
 ---
 apiVersion: v1
@@ -71,7 +71,7 @@ spec:
     - ReadWriteMany
   resources:
     requests:
-      storage: 20Ti
+      storage: 40Ti
   storageClassName: rook-cephfs
 ---
 apiVersion: v1
@@ -86,7 +86,7 @@ spec:
     - ReadWriteMany
   resources:
     requests:
-      storage: 20Ti
+      storage: 40Ti
   storageClassName: rook-cephfs
 ---
 apiVersion: v1
@@ -101,5 +101,5 @@ spec:
     - ReadWriteMany
   resources:
     requests:
-      storage: 20Ti
+      storage: 40Ti
   storageClassName: rook-cephfs
