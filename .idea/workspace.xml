@@ -22,6 +22,7 @@
     <list default="true" id="64feb96e-5147-4cef-88d5-1dde19c466ed" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/k8s/juju-block-io.sh" beforeDir="false" afterPath="$PROJECT_DIR$/k8s/juju-block-io.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plex/badwolf/plex-jnlp.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/plex/badwolf/plex-jnlp.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,7 +103,7 @@
       <workItem from="1607312483730" duration="32000000" />
       <workItem from="1608763074060" duration="7874000" />
       <workItem from="1608949943889" duration="17291000" />
-      <workItem from="1609773883105" duration="32756000" />
+      <workItem from="1609773883105" duration="35085000" />
     </task>
     <servers />
   </component>
