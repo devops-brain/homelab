@@ -24,7 +24,6 @@ spec:
       containers:
         - image: khoyi/jnlp-slave:latest
           name: jnlp
-          ## TODO:  add entrypoint
           env:
             - name: NODE_NAME
               valueFrom:
