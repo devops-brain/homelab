@@ -1,12 +1,14 @@
 #!/usr/bin/env bash
 
 
-## TODO:  use better parsing to check that all charms are active/idle
-for i in `seq 1 60`
+for i in `seq 1 15`
 do
   sleep 1s
-  until [ "$(juju show-status kubernetes-master/0 | grep kubernetes-master/0 | awk '{print $2}')" = "active" ]
+  until ["$(juju status | grep 192.168. | grep '/' | awk '{print $3}' | sort | uniq | wc -l)" == "1"]
   do
-    sleep 1s
+    until ["$(juju status | grep 192.168. | grep '/' | awk '{print $3}' | sort | uniq)" == "idle" ]
+    do
+      sleep 1s
+    done
   done
 done
