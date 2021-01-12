@@ -31,9 +31,12 @@ spec:
                   fieldPath: spec.nodeName
             - name: jenkins_master
               value: "http://192.168.77.2:8080"
-            - name: jnlp_key
-              value: ""
-          command: ["jenkins-slave", "-url", "\"${jenkins_master}\"", "-workDir=/home/jenkins/agent", "\"${jnlp_key}\"", "k8s-plex"]
+            - name: jnlp-key
+              valueFrom:
+                secretKeyRef:
+                  name: jnlp-key
+                  key: jnlp-key
+          command: ["jenkins-slave", "-url", "${jenkins_master}", "-workDir=/home/jenkins/agent", "${jnlp-key}", "k8s-plex"]
           ports:
             - containerPort: 32400
               name: plex

@@ -15,6 +15,10 @@ The storage that is shared will need to be cephfs,
 | /srv/plexmedia_symlinks | high-read speed | 1 TB |   |   |
 | /srv/plexmedia_pictures | high-read speed |   |   |   |
 
+you need to make these secrets manually currently:
+kubectl create secret generic jnlp-key --from-literal=jnlp-key='a_real_key'
+
+
 ## Usage
 Run the Jenkins job, or read it and run commands manually if you're against automation making life easier  ;)
 
