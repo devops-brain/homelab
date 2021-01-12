@@ -7,19 +7,16 @@ metadata:
   namespace: plex
   labels:
     app: plex-jnlp
-    tier: frontend
 spec:
   selector:
     matchLabels:
       app: plex-jnlp
-      tier: frontend
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
         app: plex-jnlp
-        tier: frontend
     spec:
       containers:
         - image: khoyi/jnlp-slave:latest
