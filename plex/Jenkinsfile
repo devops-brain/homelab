@@ -9,8 +9,9 @@ pipeline {
         echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
         sh "kubectl apply -f plex/badwolf/plex-namespace.yaml \
                           -f plex/badwolf/plex-pvc.yaml \
-                          -f plex/badwolf/plex-service.yaml \
-                          -f plex/badwolf/plex-mediaserver.yaml --wait=true"
+                          -f plex/badwolf/plex-mediaserver.yaml \
+                          -f plex/badwolf/plex-jnlp.yaml \
+                          -f plex/badwolf/plex-service.yaml --wait=true"
       }
     }
   }

@@ -10,9 +10,9 @@ The storage that is shared will need to be cephfs,
 | path | performance | amount | shared | persist |
 |---|---|---|---|---|
 | /transcode  | io optimized |   | false |   |
-| /config  | io optimized |   |   |   |
+| /config  | io optimized | 20 GB | false |   |
 | /srv/\<share\> | throughput readonly | 40+ TB | true |   |
-| /srv/plexmedia_symlinks | high-read speed | 1 TB |   |   |
+| /srv/plexmedia_symlinks | high-read speed | 4 GB | true |   |
 | /srv/plexmedia_pictures | high-read speed |   |   |   |
 
 you need to make these secrets manually currently:
