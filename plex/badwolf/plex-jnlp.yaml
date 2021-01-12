@@ -41,8 +41,6 @@ spec:
             - containerPort: 32400
               name: plex
           volumeMounts:
-            - name: plexconfig
-              mountPath: /config
             - name: plexmedia-symlinks
               mountPath: /media
             - name: koi-pond
@@ -56,9 +54,6 @@ spec:
             - name: roger-roger
               mountPath: /srv/masters_roger-roger
       volumes:
-        - name: plexconfig
-          persistentVolumeClaim:
-            claimName: plexconfig
         - name: plexmedia-symlinks
           persistentVolumeClaim:
             claimName: plexmedia-symlinks
