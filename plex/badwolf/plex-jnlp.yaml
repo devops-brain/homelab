@@ -33,7 +33,7 @@ spec:
                 secretKeyRef:
                   name: jnlp-key
                   key: jnlp-key
-          command: ["jenkins-slave", "-url", "\"${jenkins_master}\"", "-workDir=/home/jenkins/agent", "\"${jnlp-key}\"", "k8s-plex"]
+          command: ["jenkins-slave", "-url", "http://192.168.77.2:8080", "-workDir=/home/jenkins/agent", "02781a4306f9d9cfe6b995212308fa802b0b0623a00010bae4d4e5af9463c1a5", "k8s-plex"]
           ports:
             - containerPort: 32400
               name: plex
