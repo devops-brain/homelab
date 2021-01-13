@@ -60,23 +60,23 @@ spec:
         - name: koi-pond
           persistentVolumeClaim:
             claimName: koi-pond
-            readOnly: true
+            readOnly: false
         - name: rose-garden
           persistentVolumeClaim:
             claimName: rose-garden
-            readOnly: true
+            readOnly: false
         - name: dragons-den
           persistentVolumeClaim:
             claimName: dragons-den
-            readOnly: true
+            readOnly: false
         - name: donna-collection
           persistentVolumeClaim:
             claimName: donna-collection
-            readOnly: true
+            readOnly: false
         - name: roger-roger
           persistentVolumeClaim:
             claimName: roger-roger
-            readOnly: true
+            readOnly: false
         - name: legacy
           nfs:
             server: 192.168.77.2
