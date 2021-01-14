@@ -6,9 +6,9 @@ applications:
     # in my homelab I don't have enough hosts to put these on dedicated hosts...   but it is not needed at this scale
     num_units: 3
     to:
-      - '0'
-      - '1'
-      - '2'
+      - '6'
+      - '7'
+      - '8'
   kubeapi-load-balancer:
     num_units: 1
     to:
@@ -47,3 +47,12 @@ machines:
   '5':
     series: focal
     constraints: arch=amd64 cpu-cores=2 mem=4G root-disk=64G
+  '6':
+    series: focal
+    constraints: arch=amd64 cpu-cores=4 mem=8G root-disk=96G
+  '7':
+    series: focal
+    constraints: arch=amd64 cpu-cores=4 mem=8G root-disk=96G
+  '8':
+    series: focal
+    constraints: arch=amd64 cpu-cores=4 mem=8G root-disk=96G
