@@ -50,13 +50,13 @@ machines:
     constraints: arch=amd64 cpu-cores=2 mem=4G root-disk=64G
   '6':
     series: focal
-    constraints: arch=amd64 cpu-cores=4 mem=8G root-disk=96G
+    constraints: arch=amd64 cpu-cores=3 mem=8G root-disk=96G
   '7':
     series: focal
-    constraints: arch=amd64 cpu-cores=4 mem=8G root-disk=96G
+    constraints: arch=amd64 cpu-cores=3 mem=8G root-disk=96G
   '8':
     series: focal
-    constraints: arch=amd64 cpu-cores=4 mem=8G root-disk=96G
+    constraints: arch=amd64 cpu-cores=3 mem=8G root-disk=96G
   '9':
     series: focal
     constraints: arch=amd64 cpu-cores=2 mem=4G root-disk=64G
