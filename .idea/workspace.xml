@@ -20,9 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="64feb96e-5147-4cef-88d5-1dde19c466ed" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/plex/badwolf/plex-jnlp-old.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plex/badwolf/plex-jnlp.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/plex/badwolf/plex-jnlp.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/k8s/changes.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/k8s/changes.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,19 +71,6 @@
       <recent name="$PROJECT_DIR$/ceph/juju" />
     </key>
   </component>
-  <component name="RunManager">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -102,7 +88,8 @@
       <workItem from="1608763074060" duration="7874000" />
       <workItem from="1608949943889" duration="17291000" />
       <workItem from="1609773883105" duration="48893000" />
-      <workItem from="1610768756675" duration="2395000" />
+      <workItem from="1610768756675" duration="2680000" />
+      <workItem from="1610847767668" duration="252000" />
     </task>
     <servers />
   </component>
