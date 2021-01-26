@@ -35,6 +35,8 @@ spec:
           volumeMounts:
             - name: plexconfig
               mountPath: /config
+            - name: plexbackups
+              mountPath: /srv/backups
             - name: plexmedia-symlinks
               mountPath: /media
             - name: koi-pond
@@ -51,6 +53,10 @@ spec:
         - name: plexconfig
           persistentVolumeClaim:
             claimName: plexconfig
+        - name: plexbackups
+          persistentVolumeClaim:
+            claimName: plexbackups
+            readOnly: false
         - name: plexmedia-symlinks
           persistentVolumeClaim:
             claimName: plexmedia-symlinks

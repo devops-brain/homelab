@@ -33,6 +33,8 @@ spec:
             - containerPort: 32400
               name: plex
           volumeMounts:
+            - name: plexbackups
+              mountPath: /srv/backups
             - name: plexmedia-symlinks
               mountPath: /media
             - name: koi-pond
@@ -48,6 +50,10 @@ spec:
             - name: legacy
               mountPath: /srv/nfs
       volumes:
+        - name: plexbackups
+          persistentVolumeClaim:
+            claimName: plexbackups
+            readOnly: false
         - name: plexmedia-symlinks
           persistentVolumeClaim:
             claimName: plexmedia-symlinks

@@ -12,7 +12,7 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 20Gi
+      storage: 32Gi
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -26,7 +26,22 @@ spec:
     - ReadWriteMany
   resources:
     requests:
-      storage: 4Gi
+      storage: 8Gi
+  storageClassName: rook-cephfs
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: plexbackups
+  namespace: plex
+  labels:
+    app: plex
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 512Gi
   storageClassName: rook-cephfs
 ---
 apiVersion: v1
@@ -41,7 +56,7 @@ spec:
     - ReadWriteMany
   resources:
     requests:
-      storage: 40Ti
+      storage: 1024Ti
   storageClassName: rook-cephfs
 ---
 apiVersion: v1
@@ -56,7 +71,7 @@ spec:
     - ReadWriteMany
   resources:
     requests:
-      storage: 40Ti
+      storage: 1024Ti
   storageClassName: rook-cephfs
 ---
 apiVersion: v1
@@ -71,7 +86,7 @@ spec:
     - ReadWriteMany
   resources:
     requests:
-      storage: 40Ti
+      storage: 1024Ti
   storageClassName: rook-cephfs
 ---
 apiVersion: v1
@@ -86,7 +101,7 @@ spec:
     - ReadWriteMany
   resources:
     requests:
-      storage: 40Ti
+      storage: 1024Ti
   storageClassName: rook-cephfs
 ---
 apiVersion: v1
@@ -101,5 +116,5 @@ spec:
     - ReadWriteMany
   resources:
     requests:
-      storage: 40Ti
+      storage: 1024Ti
   storageClassName: rook-cephfs
