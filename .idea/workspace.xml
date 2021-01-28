@@ -20,8 +20,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="64feb96e-5147-4cef-88d5-1dde19c466ed" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/ceph/rook-cluster/operator.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plex/badwolf/plex-mediaserver.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/plex/badwolf/plex-mediaserver.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ceph/Jenkinsfile" beforeDir="false" afterPath="$PROJECT_DIR$/ceph/Jenkinsfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ceph/rook-cluster/cluster.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/ceph/rook-cluster/cluster.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,7 +49,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/plex/badwolf" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/ceph/rook-cluster" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -71,6 +73,19 @@
       <recent name="$PROJECT_DIR$/ceph/juju" />
     </key>
   </component>
+  <component name="RunManager">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -90,7 +105,7 @@
       <workItem from="1609773883105" duration="48893000" />
       <workItem from="1610768756675" duration="2680000" />
       <workItem from="1610847767668" duration="457000" />
-      <workItem from="1610997061927" duration="5376000" />
+      <workItem from="1610997061927" duration="12235000" />
     </task>
     <servers />
   </component>
