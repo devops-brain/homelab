@@ -37,7 +37,7 @@ pipeline {
     stage('deploy ceph toolbox'){
       steps {
         echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
-        sh "kubectl apply -f rook/cluster/examples/kubernetes/ceph/toolbox.yaml --wait=true"
+        sh "kubectl apply -f ceph/rook-cluster/toolbox.yaml --wait=true"
       }
     }
     stage('deploy demo environment'){
