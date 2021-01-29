@@ -45,7 +45,7 @@ spec:
     rulesNamespace: rook-ceph
   network:
   # enable host networking
-  #provider: host
+  provider: host
   crashCollector:
     disable: false
     # enable log collector, daemons will log on files and rotate
