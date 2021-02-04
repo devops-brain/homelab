@@ -44,8 +44,23 @@ spec:
     # deployed) to set rulesNamespace for all the clusters. Otherwise, you will get duplicate alerts with multiple alert definitions.
     rulesNamespace: rook-ceph
   network:
-  # enable host networking
-  provider: host
+    # enable host networking
+    #provider: host
+    # EXPERIMENTAL: enable the Multus network provider
+    #provider: multus
+    #selectors:
+      # The selector keys are required to be `public` and `cluster`.
+      # Based on the configuration, the operator will do the following:
+      #   1. if only the `public` selector key is specified both public_network and cluster_network Ceph settings will listen on that interface
+      #   2. if both `public` and `cluster` selector keys are specified the first one will point to 'public_network' flag and the second one to 'cluster_network'
+      #
+      # In order to work, each selector value must match a NetworkAttachmentDefinition object in Multus
+      #
+      #public: public-conf --> NetworkAttachmentDefinition object name in Multus
+      #cluster: cluster-conf --> NetworkAttachmentDefinition object name in Multus
+    # Provide internet protocol version. IPv6, IPv4 or empty string are valid options. Empty string would mean IPv4
+    #ipFamily: "IPv6"
+  # enable the crash collector for ceph daemon crash collection
   crashCollector:
     disable: false
     # enable log collector, daemons will log on files and rotate
