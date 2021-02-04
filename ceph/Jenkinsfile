@@ -15,7 +15,7 @@ pipeline {
         echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
         sh "kubectl apply -f rook/cluster/examples/kubernetes/ceph/crds.yaml --wait=true"
         sh "kubectl apply -f rook/cluster/examples/kubernetes/ceph/common.yaml --wait=true"
-        sh "kubectl apply -f ceph/rook-cluster/operator.yaml --wait=true"
+        sh "kubectl apply -f rook/cluster/examples/kubernetes/ceph/operator.yaml --wait=true"
       }
     }
     stage('deploy ceph cluster, pool, and csi classes through rook operator'){
