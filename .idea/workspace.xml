@@ -21,7 +21,9 @@
   <component name="ChangeListManager">
     <list default="true" id="64feb96e-5147-4cef-88d5-1dde19c466ed" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ceph/Jenkinsfile" beforeDir="false" afterPath="$PROJECT_DIR$/ceph/Jenkinsfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ceph/rook-cluster/cluster.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/ceph/rook-cluster/cluster.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ceph/rook-cluster/operator.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/ceph/rook-cluster/operator.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ceph/rook-cluster/toolbox.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/ceph/rook-cluster/toolbox.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,7 +94,7 @@
       <workItem from="1610847767668" duration="457000" />
       <workItem from="1610997061927" duration="27307000" />
       <workItem from="1612410500753" duration="456000" />
-      <workItem from="1612411139237" duration="128000" />
+      <workItem from="1612411139237" duration="4854000" />
     </task>
     <servers />
   </component>
