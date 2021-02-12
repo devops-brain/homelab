@@ -7,12 +7,15 @@ pipeline {
     stage('bootstrap cluster if missing'){
       steps {
         echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
-        sh 'echo "TODO:  create conditional and run code below"'
-        echo '''juju add-model kube HomeLab
-             juju model-config -m kube default-series=focal
-             juju add-machine -m kube wired-clam.khoyi.io
-             juju add-machine -m kube fast-stag.khoyi.io
-             juju add-machine -m kube hairy-hyena.khoyi.io'''
+        sh '''echo "if the model doesn't exist, bootstrap it"
+              if [ "$(juju list-models | grep kube | wc -l)" == "0" ]
+                then
+                  juju add-model kube HomeLab
+                  juju model-config -m kube default-series=focal
+                  juju add-machine -m kube cuddly-kitten.khoyi.io
+                  juju add-machine -m kube hairy-hyena.khoyi.io
+                  juju add-machine -m kube wired-clam.khoyi.io
+              fi'''
       }
     }
     stage('update juju deployment'){

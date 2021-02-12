@@ -3,7 +3,6 @@ applications:
     to:
       - '3'
   etcd:
-    # in my homelab I don't have enough hosts to put these on dedicated hosts...   but it is not needed at this scale
     num_units: 3
     to:
       - '6'
@@ -14,9 +13,6 @@ applications:
     to:
       - '4'
   kubernetes-master:
-    # this is not redundant as the charm defaults to
-    # but only the first three hosts are bare metal, the rest are in a single kvm host...
-    # so adding a second node would not add real redundancy
     num_units: 2
     options:
       # the following hurts platform security against compromised pods/containers, but is needed for rook to setup ceph
