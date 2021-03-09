@@ -62,7 +62,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: DVR
+  name: dvr
   namespace: plex
   labels:
     app: plex
