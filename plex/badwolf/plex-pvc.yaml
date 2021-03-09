@@ -62,6 +62,21 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
+  name: DVR
+  namespace: plex
+  labels:
+    app: plex
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1024Ti
+  storageClassName: rook-cephfs
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
   name: rose-garden
   namespace: plex
   labels:

@@ -37,6 +37,8 @@ spec:
               mountPath: /srv/backups
             - name: plexmedia-symlinks
               mountPath: /media
+            - name: DVR
+              mountPath: /srv/masters_DVR
             - name: koi-pond
               mountPath: /srv/masters_koi-pond
             - name: rose-garden
@@ -57,6 +59,10 @@ spec:
         - name: plexmedia-symlinks
           persistentVolumeClaim:
             claimName: plexmedia-symlinks
+            readOnly: false
+        - name: DVR
+          persistentVolumeClaim:
+            claimName: DVR
             readOnly: false
         - name: koi-pond
           persistentVolumeClaim:
