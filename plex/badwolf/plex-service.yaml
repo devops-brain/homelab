@@ -9,7 +9,7 @@ metadata:
     app: plex
 spec:
   ports:
-    - name: plex-access
+    - name: plexaccess
       nodePort: 32400
       port: 32400
       protocol: TCP
@@ -19,17 +19,17 @@ spec:
       port: 3005
       protocol: TCP
       targetPort: 3005
-    - name: plex-roku
+    - name: plexroku
       nodePort: 32473
       port: 8324
       protocol: TCP
       targetPort: 8324
-    - name: plex4-DLNA-tcp
+    - name: plexdlnatcp
       nodePort: 32469
       port: 32469
       protocol: TCP
       targetPort: 32469
-    - name: plex-DLNA
+    - name: plexdlna
       nodePort: 32475
       port: 1900
       protocol: UDP
