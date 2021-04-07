@@ -11,6 +11,7 @@ pipeline {
                           -f plex/badwolf/plex-pvc.yaml \
                           -f plex/badwolf/plex-mediaserver.yaml \
                           -f plex/badwolf/plex-jnlp.yaml \
+                          -f plex/badwolf/plex-samba.yaml \
                           -f plex/badwolf/plex-service.yaml --wait=true"
       }
     }
