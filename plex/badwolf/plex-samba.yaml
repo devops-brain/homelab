@@ -28,7 +28,7 @@ spec:
                   fieldPath: spec.nodeName
             - name: jenkins_master
               value: "http://192.168.77.2:8080"
-          command: [ '-u', 'malkav;Change-me2d!;1001;1001', '-s', "srv;/srv;yes;no;no;malkav;malkav"]
+          command: [ '-u', 'malkav;Change-me2;1001;1001', '-s', "srv;/srv;yes;no;no;malkav;malkav"]
           ports:
             - containerPort: 445
               name: samba
