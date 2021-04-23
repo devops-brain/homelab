@@ -49,6 +49,8 @@ spec:
               mountPath: /srv/masters_donna-collection
             - name: roger-roger
               mountPath: /srv/masters_roger-roger
+            - name: legacy
+              mountPath: /srv/nfs
       volumes:
         - name: plexbackups
           persistentVolumeClaim:
@@ -82,4 +84,8 @@ spec:
           persistentVolumeClaim:
             claimName: roger-roger
             readOnly: false
+        - name: legacy
+          nfs:
+            server: 192.168.77.2
+            path: /srv/nfs
 
