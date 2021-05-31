@@ -42,7 +42,7 @@ spec:
             - name: USER
               value: "devops-brain"
             - name: PASSKEY
-              value: "bf452005d6804cbdbf452005d6804cbd"
+              value: "TODO"
             - name: POWER
               value: "full"
             - name: TEAM
