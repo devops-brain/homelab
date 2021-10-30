@@ -12,16 +12,18 @@ pipeline {
                 then
                   juju add-model kube HomeLab
                   juju model-config -m kube default-series=focal
+                  juju add-machine -m kube zotac-mini-01.khoyi.io
+                  juju add-machine -m kube casual-corgi.khoyi.io
+                  juju add-machine -m kube loving-cattle.khoyi.io
+                  juju add-machine -m kube golden-tiger.khoyi.io
                   juju add-machine -m kube cuddly-kitten.khoyi.io
-                  juju add-machine -m kube hairy-hyena.khoyi.io
-                  juju add-machine -m kube wired-clam.khoyi.io
               fi'''
       }
     }
     stage('update juju deployment'){
       steps {
         echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
-        sh "juju deploy -m kube --map-machines=existing,6=10 cs:bundle/charmed-kubernetes-655 --overlay k8s/changes.yaml "
+        sh "juju deploy -m kube --map-machines=existing cs:bundle/charmed-kubernetes-807 --overlay k8s/changes.yaml"
         sh "./k8s/juju-block-io.sh"
         echo "I'll need to test if the kubernetes-master charm switches to active prematurely, but this should block IO until the deployment is complete."
       }
@@ -29,14 +31,9 @@ pipeline {
     stage('post-deployment config'){
       steps {
         echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
-        echo "TODO:  make this idempotent, remove rm command and use a force on the copy"
+        echo "TODO:  refactor"
         sh "mkdir -p ~/.kube"
         sh "juju scp kubernetes-master/0:config ~/.kube/config"
-        sh "rm -fv /home/ubuntu/.kube/config"
-        sh "mkdir -p /home/ubuntu/.kube"
-        sh "cp /root/.kube/config /home/ubuntu/.kube/"
-        sh "chown ubuntu /home/ubuntu/.kube"
-        sh "chown ubuntu /home/ubuntu/.kube/config"
       }
     }
   }
