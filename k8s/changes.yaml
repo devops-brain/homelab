@@ -56,6 +56,20 @@ applications:
       - '1'
       - '2'
       - '3'
+  ceph-fs:
+    charm: cs:ceph-fs
+    num_units: 1
+    options:
+      pool-type: erasure-coded
+      ec-profile-device-class: hdd
+      ec-profile-k: 2
+      ec-profile-m: 1
+      ec-profile-name: bulkfs
+      # TODO:  figure out how to assign metadata pool to NVMe devices only
+      metadata-pool: cephfsmd
+      source: distro
+    to:
+      - 'lxd:1'
 machines:
   '0':
     series: focal
@@ -74,3 +88,5 @@ relations:
     - kubernetes-master
   - - ceph-mon:client
     - kubernetes-master
+  - - ceph-fs:ceph-mds
+    - ceph-mon:mds
