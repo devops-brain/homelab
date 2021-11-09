@@ -23,7 +23,7 @@ pipeline {
     stage('update juju deployment'){
       steps {
         echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
-        sh "juju deploy -m kube --map-machines=existing cs:bundle/charmed-kubernetes-807 --overlay k8s/changes.yaml"
+        sh "juju deploy -m kube --map-machines=existing cs:bundle/charmed-kubernetes-814 --overlay k8s/changes.yaml"
         sh "./k8s/juju-block-io.sh"
         echo "I'll need to test if the kubernetes-master charm switches to active prematurely, but this should block IO until the deployment is complete."
       }
