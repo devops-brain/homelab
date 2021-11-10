@@ -7,9 +7,9 @@ metadata:
   labels:
     app: plex
 spec:
-  storageClassName: cephfs
+  storageClassName: ceph-ext4
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
   resources:
     requests:
       storage: 32Gi
