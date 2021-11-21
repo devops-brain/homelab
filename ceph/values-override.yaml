@@ -1,0 +1,166 @@
+# Default values for a single rook-ceph cluster
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+# Namespace of the main rook operator
+operatorNamespace: rook-ceph
+
+# Installs a debugging toolbox deployment
+toolbox:
+  enabled: true
+  image: rook/ceph:v1.7.7
+  tolerations: []
+  affinity: {}
+
+monitoring:
+  # requires Prometheus to be pre-installed
+  # enabling will also create RBAC rules to allow Operator to create ServiceMonitors
+  enabled: false
+
+# If true, create & use PSP resources. Set this to the same value as the rook-ceph chart.
+pspEnable: true
+
+cephClusterSpec:
+  skipUpgradeChecks: false
+  continueUpgradeAfterChecksEvenIfNotHealthy: false
+
+  # enable the ceph dashboard for viewing cluster status
+  dashboard:
+    enabled: true
+    # serve the dashboard under a subpath (useful when you are accessing the dashboard via a reverse proxy)
+    # urlPrefix: /ceph-dashboard
+    # serve the dashboard at the given port.
+    # port: 8443
+
+  resources:
+    # The requests and limits set here, allow the mgr pod to use half of one CPU core and 1 gigabyte of memory
+    mgr:
+      limits:
+        cpu: "500m"
+        memory: "1024Mi"
+      requests:
+        cpu: "500m"
+        memory: "1024Mi"
+    # The above example requests/limits can also be added to the other components
+  #   mon:
+  #   osd:
+  #   prepareosd:
+  #   mgr-sidecar:
+  #   crashcollector:
+  #   logcollector:
+  #   cleanup:
+
+  # The option to automatically remove OSDs that are out and are safe to destroy.
+  removeOSDsIfOutAndSafeToRemove: false
+
+  storage: # cluster level storage configuration and selection
+    useAllNodes: true
+    useAllDevices: true
+    config:
+      metadataDevice: "nvme1n1" # specify a non-rotational storage so ceph-volume will use it as block db device of bluestore.
+      encryptedDevice: "true" # the default value for this option is "false"
+
+ingress:
+  dashboard: {}
+    # annotations:
+    #   kubernetes.io/ingress.class: nginx
+    #   external-dns.alpha.kubernetes.io/hostname: example.com
+    #   nginx.ingress.kubernetes.io/rewrite-target: /ceph-dashboard/$2
+    # host:
+    #   name: example.com
+    #   path: "/ceph-dashboard(/|$)(.*)"
+  # tls:
+
+cephBlockPools:
+  - name: ceph-blockpool
+    # see https://github.com/rook/rook/blob/master/Documentation/ceph-pool-crd.md#spec for available configuration
+    spec:
+      failureDomain: host
+      replicated:
+        size: 3
+      deviceClass: ssd
+    storageClass:
+      enabled: true
+      name: ceph-block
+      isDefault: true
+      reclaimPolicy: Delete
+      allowVolumeExpansion: true
+      # see https://github.com/rook/rook/blob/master/Documentation/ceph-block.md#provision-storage for available configuration
+      parameters:
+        imageFormat: "2"
+        imageFeatures: layering
+        # The secrets contain Ceph admin credentials.
+        csi.storage.k8s.io/provisioner-secret-name: rook-csi-rbd-provisioner
+        csi.storage.k8s.io/provisioner-secret-namespace: rook-ceph
+        csi.storage.k8s.io/controller-expand-secret-name: rook-csi-rbd-provisioner
+        csi.storage.k8s.io/controller-expand-secret-namespace: rook-ceph
+        csi.storage.k8s.io/node-stage-secret-name: rook-csi-rbd-node
+        csi.storage.k8s.io/node-stage-secret-namespace: rook-ceph
+        csi.storage.k8s.io/fstype: ext4
+
+
+cephFileSystems:
+  - name: ceph-filesystem
+    # see https://github.com/rook/rook/blob/master/Documentation/ceph-filesystem-crd.md#filesystem-settings for available configuration
+    spec:
+      metadataPool:
+        failureDomain: host
+        replicated:
+          size: 3
+        deviceClass: ssd
+      dataPools:
+        - erasureCoded:
+            dataChunks: 2
+            codingChunks: 1
+          failureDomain: host
+          deviceClass: hdd
+      metadataServer:
+        activeCount: 1
+        activeStandby: true
+    storageClass:
+      enabled: true
+      isDefault: false
+      name: ceph-filesystem
+      reclaimPolicy: Delete
+      allowVolumeExpansion: true
+      # see https://github.com/rook/rook/blob/master/Documentation/ceph-filesystem.md#provision-storage for available configuration
+      parameters:
+        # The secrets contain Ceph admin credentials.
+        csi.storage.k8s.io/provisioner-secret-name: rook-csi-cephfs-provisioner
+        csi.storage.k8s.io/provisioner-secret-namespace: rook-ceph
+        csi.storage.k8s.io/controller-expand-secret-name: rook-csi-cephfs-provisioner
+        csi.storage.k8s.io/controller-expand-secret-namespace: rook-ceph
+        csi.storage.k8s.io/node-stage-secret-name: rook-csi-cephfs-node
+        csi.storage.k8s.io/node-stage-secret-namespace: rook-ceph
+  - name: ceph-fs-replicated
+    # see https://github.com/rook/rook/blob/master/Documentation/ceph-filesystem-crd.md#filesystem-settings for available configuration
+    spec:
+      metadataPool:
+        failureDomain: host
+        replicated:
+          size: 3
+        deviceClass: ssd
+      dataPools:
+        - failureDomain: host
+          replicated:
+            size: 3
+          deviceClass: hdd
+      metadataServer:
+        activeCount: 1
+        activeStandby: true
+    storageClass:
+      enabled: true
+      isDefault: false
+      name: ceph-fs-replicated
+      reclaimPolicy: Delete
+      allowVolumeExpansion: true
+      # see https://github.com/rook/rook/blob/master/Documentation/ceph-filesystem.md#provision-storage for available configuration
+      parameters:
+        # The secrets contain Ceph admin credentials.
+        csi.storage.k8s.io/provisioner-secret-name: rook-csi-cephfs-provisioner
+        csi.storage.k8s.io/provisioner-secret-namespace: rook-ceph
+        csi.storage.k8s.io/controller-expand-secret-name: rook-csi-cephfs-provisioner
+        csi.storage.k8s.io/controller-expand-secret-namespace: rook-ceph
+        csi.storage.k8s.io/node-stage-secret-name: rook-csi-cephfs-node
+        csi.storage.k8s.io/node-stage-secret-namespace: rook-ceph
+

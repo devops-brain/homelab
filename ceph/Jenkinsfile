@@ -4,47 +4,29 @@ pipeline {
   }
 
   stages {
-    stage('pull rook codebase'){
+    stage('installing tools'){
       steps {
         echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
-        sh 'git clone --single-branch --branch release-1.5 https://github.com/rook/rook.git'
+        sh 'echo "TODO:  ensure tools are installed"'
       }
     }
-    stage('deploy rook dependencies and operator'){
+    stage('add helm repo'){
       steps {
         echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
-        sh "kubectl apply -f rook/cluster/examples/kubernetes/ceph/crds.yaml --wait=true"
-        sh "kubectl apply -f rook/cluster/examples/kubernetes/ceph/common.yaml --wait=true"
-        sh "kubectl apply -f ceph/rook-cluster/operator.yaml --wait=true"
+        sh "helm repo add rook-release https://charts.rook.io/release"
       }
     }
-    stage('deploy ceph cluster, pool, and csi classes through rook operator'){
+    stage('deploy base ceph rook operator and infra'){
       steps {
         echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
-        sh "kubectl apply -f ceph/rook-cluster/cluster.yaml --wait=true"
-        sh "kubectl apply -f ceph/rook-cluster/pools.yaml --wait=true"
-        sh "kubectl apply -f ceph/rook-cluster/filesystem.yaml --wait=true"
-        sh "kubectl apply -f ceph/rook-cluster/csi-storageclass.yaml --wait=true"
+        sh "helm install --create-namespace --namespace rook-ceph rook-ceph rook-release/rook-ceph"
       }
     }
-    stage('deploy ceph snapshots'){
+    stage('deploy ceph cluster'){
       steps {
         echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
-        sh "#kubectl apply -f rook/cluster/examples/kubernetes/ceph/csi/rbd/snapshotclass.yaml \
-                           -f rook/cluster/examples/kubernetes/ceph/csi/cephfs/snapshotclass.yaml --wait=true"
-      }
-    }
-    stage('deploy ceph toolbox'){
-      steps {
-        echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
-        sh "kubectl apply -f ceph/rook-cluster/toolbox.yaml --wait=true"
-      }
-    }
-    stage('deploy demo environment'){
-      steps {
-        echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
-        sh "#kubectl apply -f ceph/demo/mysql.yaml \
-                          -f ceph/demo/wordpress.yaml --wait=true"
+        sh "#helm install --create-namespace --namespace rook-ceph rook-ceph-cluster \
+                --set operatorNamespace=rook-ceph rook-release/rook-ceph-cluster -f values-override.yaml"
       }
     }
   }
