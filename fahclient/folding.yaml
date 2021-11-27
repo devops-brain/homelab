@@ -17,7 +17,7 @@ spec:
   resources:
     requests:
       storage: 1Gi
-  storageClassName: rook-ceph-cephfs
+  storageClassName: ceph-fs-replicated
 ---
 apiVersion: apps/v1
 kind: DaemonSet
@@ -37,14 +37,12 @@ spec:
     spec:
       containers:
         - name: fahclient
-          image: gokulpch/fah:7.5
+          image: foldingathome/fah-gpu:latest
           env:
             - name: USER
               value: "devops-brain"
-            - name: PASSKEY
-              value: "TODO"
             - name: POWER
-              value: "full"
+              value: "light"
             - name: TEAM
               value: "234679"
             - name: NODE_NAME
@@ -57,15 +55,15 @@ spec:
               subPathExpr: $(NODE_NAME)
           ports:
             - containerPort: 7396
-          readinessProbe:
-            httpGet:
-              path: /favicon.ico
-              port: 7396
+          #readinessProbe:
+          #  httpGet:
+          #    path: /favicon.ico
+          #    port: 7396
           resources:
             limits:
+              cpu: 6
               memory: 4Gi
             requests:
-              cpu: 6000m
               memory: 200Mi
           securityContext:
             readOnlyRootFilesystem: true
