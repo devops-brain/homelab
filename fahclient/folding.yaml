@@ -60,9 +60,9 @@ spec:
           #    path: /favicon.ico
           #    port: 7396
           resources:
-            limits:
-              cpu: 5
-              memory: 4Gi
+          #  limits:
+          #    cpu: 5
+          #    memory: 4Gi
             requests:
               cpu: 4
               memory: 200Mi
