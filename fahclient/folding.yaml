@@ -61,7 +61,7 @@ spec:
           #    port: 7396
           resources:
             limits:
-              cpu: 4
+              cpu: 5
               memory: 4Gi
             requests:
               memory: 200Mi
