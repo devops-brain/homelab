@@ -7,13 +7,13 @@ do
   #echo ${i}
   #echo $(juju status | grep 192.168. | grep '/' | awk '{print $3}' | sort | uniq | wc -l)
   #echo $(juju status | grep 192.168. | grep '/' | awk '{print $3}' | sort | uniq)
-  until [ "$(juju status | grep 192.168. | grep '/' | awk '{print $3}' | sort | uniq | wc -l)" == "1" ]
+  until [ "$(juju status | grep 192.168. | grep '/' | grep -v 'default' | awk '{print $3}' | sort | uniq | wc -l)" == "1" ]
   do
-    until [ "$(juju status | grep 192.168. | grep '/' | awk '{print $3}' | sort | uniq)" == "idle" ]
+    until [ "$(juju status | grep 192.168. | grep '/' | grep -v 'default' | awk '{print $3}' | sort | uniq)" == "idle" ]
     do
-      until [ "$(juju status | grep 192.168. | grep '/' | awk '{print $2}' | sort | uniq | wc -l)" == "1" ]
+      until [ "$(juju status | grep 192.168. | grep '/' | grep -v 'default' | awk '{print $2}' | sort | uniq | wc -l)" == "1" ]
       do
-        until [ "$(juju status | grep 192.168. | grep '/' | awk '{print $2}' | sort | uniq)" == "active" ]
+        until [ "$(juju status | grep 192.168. | grep '/' | grep -v 'default' | awk '{print $2}' | sort | uniq)" == "active" ]
         do
           #echo $(juju status | grep 192.168. | grep '/' | awk '{print $2}' | sort | uniq)
           #echo $(juju status | grep 192.168. | grep '/' | awk '{print $3}' | sort | uniq)
