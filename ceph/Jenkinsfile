@@ -19,13 +19,13 @@ pipeline {
     stage('deploy base ceph rook operator and infra'){
       steps {
         echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
-        sh "helm install --create-namespace --namespace rook-ceph rook-ceph rook-release/rook-ceph"
+        sh "helm upgrade -i --create-namespace --namespace rook-ceph rook-ceph rook-release/rook-ceph"
       }
     }
     stage('deploy ceph cluster'){
       steps {
         echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
-        sh "helm install --create-namespace --namespace rook-ceph rook-ceph-cluster \
+        sh "helm upgrade -i --create-namespace --namespace rook-ceph rook-ceph-cluster \
                 --set operatorNamespace=rook-ceph rook-release/rook-ceph-cluster -f values-override.yaml"
       }
     }
