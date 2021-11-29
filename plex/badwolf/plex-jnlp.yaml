@@ -29,6 +29,13 @@ spec:
             - name: jenkins_master
               value: "http://192.168.77.2:8080"
           command: ["jenkins-slave", "-url", "http://192.168.77.2:8080", "-workDir=/home/jenkins/agent", "02781a4306f9d9cfe6b995212308fa802b0b0623a00010bae4d4e5af9463c1a5", "k8s-plex"]
+          resources:
+            limits:
+              cpu: "100m"
+              memory: 1Gi
+            requests:
+              cpu: "100m"
+              memory: 1Gi
           ports:
             - containerPort: 32400
               name: plex
