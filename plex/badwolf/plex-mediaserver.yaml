@@ -28,6 +28,13 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: spec.nodeName
+          resources:
+            limits:
+              cpu: 8
+              memory: 8Gi
+            requests:
+              cpu: 4
+              memory: 4Gi
           ports:
             - containerPort: 32400
               name: plex

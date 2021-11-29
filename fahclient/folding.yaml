@@ -64,6 +64,7 @@ spec:
               cpu: 5
               memory: 4Gi
             requests:
+              cpu: 4
               memory: 200Mi
           securityContext:
             readOnlyRootFilesystem: true
