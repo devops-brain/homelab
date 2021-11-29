@@ -45,8 +45,8 @@ cephClusterSpec:
   #   mon:
     osd:
       limits:
-        cpu: 1
-        memory: "12Gi"
+        cpu: "500m"
+        memory: "14Gi"
   #   prepareosd:
   #   mgr-sidecar:
   #   crashcollector:
