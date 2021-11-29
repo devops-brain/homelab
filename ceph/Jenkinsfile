@@ -26,7 +26,7 @@ pipeline {
       steps {
         echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
         sh "helm upgrade -i --create-namespace --namespace rook-ceph rook-ceph-cluster \
-                --set operatorNamespace=rook-ceph rook-release/rook-ceph-cluster -f values-override.yaml"
+                --set operatorNamespace=rook-ceph rook-release/rook-ceph-cluster -f ceph/values-override.yaml"
       }
     }
   }
