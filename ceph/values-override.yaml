@@ -43,10 +43,13 @@ cephClusterSpec:
         memory: "1024Mi"
     # The above example requests/limits can also be added to the other components
   #   mon:
-  #   osd:
-  #     limits:
-  #       cpu: "500m"
-  #       memory: "14Gi"
+    osd:
+      requests:
+        cpu: "500m"
+        memory: "1Gi"
+      limits:
+        cpu: "500m"
+        memory: "14Gi"
   #   prepareosd:
   #   mgr-sidecar:
   #   crashcollector:
