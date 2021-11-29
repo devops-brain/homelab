@@ -25,7 +25,7 @@ pipeline {
     stage('deploy ceph cluster'){
       steps {
         echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
-        sh "#helm install --create-namespace --namespace rook-ceph rook-ceph-cluster \
+        sh "helm install --create-namespace --namespace rook-ceph rook-ceph-cluster \
                 --set operatorNamespace=rook-ceph rook-release/rook-ceph-cluster -f values-override.yaml"
       }
     }
