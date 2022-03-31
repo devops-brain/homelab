@@ -1,0 +1,38 @@
+pipeline {
+  agent {
+    label "kubectl"
+  }
+
+  stages {
+    stage('deploy postgres cluster for nextcloud'){
+      steps {
+        echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+        sh ""
+      }
+    }
+    stage('deploy nextcloud'){
+      steps {
+        echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+        sh "helm repo add nextcloud https://nextcloud.github.io/helm/"
+        sh "helm repo update"
+        echo """helm install my-nextcloud nextcloud/nextcloud --namespace nextcloud \
+            --set image.tag=21.0.0 \
+            --set internalDatabase.enabled=false \
+            --set externalDatabase.enabled=true \
+            --set externalDatabase.type=postgresql \
+            --set externalDatabase.host="nextcloud-postgresql"  \
+            --set externalDatabase.database=nextcloud \
+            --set externalDatabase.existingSecret.enabled=true \
+            --set externalDatabase.existingSecret.secretName=nextcloud-postgresql \
+            --set externalDatabase.existingSecret.usernameKey=postgresql-username \
+            --set externalDatabase.existingSecret.passwordKey=postgresql-password \
+            --set persistence.enabled=true \
+            --set persistence.existingClaim=pvc-nextcloud \
+            --set cronjob.enabled=true \
+            --set cronjob.schedule="*/15 * * * *" \
+            --set service.type=ClusterIP \
+            --set service.nodePort=32123 """
+      }
+    }
+  }
+}

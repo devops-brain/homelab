@@ -1,0 +1,26 @@
+pipeline {
+  agent {
+    label "kubectl"
+  }
+
+  stages {
+    stage('deploy monitoring'){
+      steps {
+        echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+        sh "kubectl create namespace monitoring"
+        sh "helm repo add prometheus-community https://prometheus-community.github.io/helm-charts"
+        sh "helm repo update"
+        sh "helm upgrade -i --namespace monitoring prometheus-operator prometheus-community/kube-prometheus-stack"
+      }
+    }
+    stage('deploy stackgres custom resource definitions'){
+      steps {
+        echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+        sh "helm repo add stackgres-charts https://stackgres.io/downloads/stackgres-k8s/stackgres/helm/"
+        sh "helm repo update"
+        sh "helm upgrade -i --namespace stackgres stackgres-operator --set-string admin.ui.service.type=ClusterIP https://stackgres.io/downloads/stackgres-k8s/stackgres/latest/helm/stackgres-operator.tgz"
+        sh "echo 'TODO:  check and wait for stackgres config to finish'"
+      }
+    }
+  }
+}

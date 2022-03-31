@@ -20,14 +20,13 @@ applications:
     to:
       - '0'
   kubernetes-worker:
-    num_units: 4
+    num_units: 3
     options:
       ingress: 'true'
     to:
       - '1'
       - '2'
       - '3'
-      - '4'
   #    bluestore: 'True'
   #    bluestore-db: '/dev/nvme1n1'
   #    osd-devices: '/dev/sdb /dev/sdc /dev/sdd /dev/sde /dev/sdf /dev/nvme2n1'
@@ -39,6 +38,4 @@ machines:
   '2':
     series: focal
   '3':
-    series: focal
-  '4':
     series: focal
