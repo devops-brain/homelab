@@ -10,7 +10,7 @@ pipeline {
         sh "kubectl create namespace monitoring"
         sh "helm repo add prometheus-community https://prometheus-community.github.io/helm-charts"
         sh "helm repo update"
-        sh "helm upgrade -i --namespace monitoring prometheus-operator prometheus-community/kube-prometheus-stack"
+        sh "helm upgrade -i --namespace monitoring prometheus prometheus-community/prometheus"
       }
     }
     stage('deploy stackgres custom resource definitions'){
