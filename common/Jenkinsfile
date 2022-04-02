@@ -7,7 +7,7 @@ pipeline {
     stage('deploy monitoring'){
       steps {
         echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
-        sh "kubectl create namespace monitoring"
+        sh "kubectl apply -f common/plex-namespace.yaml --wait=true"
         sh "helm repo add prometheus-community https://prometheus-community.github.io/helm-charts"
         sh "helm repo update"
         sh "helm upgrade -i --namespace monitoring prometheus prometheus-community/kube-prometheus-stack"
