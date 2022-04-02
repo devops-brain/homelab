@@ -18,7 +18,7 @@ pipeline {
         echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
         sh "helm repo add stackgres-charts https://stackgres.io/downloads/stackgres-k8s/stackgres/helm/"
         sh "helm repo update"
-        sh "helm upgrade -i --namespace stackgres stackgres-operator --set-string admin.ui.service.type=ClusterIP https://stackgres.io/downloads/stackgres-k8s/stackgres/latest/helm/stackgres-operator.tgz"
+        sh "helm upgrade -i --namespace stackgres-operator stackgres-operator --set-string admin.ui.service.type=ClusterIP https://stackgres.io/downloads/stackgres-k8s/stackgres/latest/helm/stackgres-operator.tgz"
         sh "echo 'TODO:  check and wait for stackgres config to finish'"
       }
     }
