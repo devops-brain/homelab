@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-
+whoami
 for i in `seq 1 15`
 do
   sleep 1s
