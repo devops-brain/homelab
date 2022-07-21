@@ -12,30 +12,33 @@ applications:
     num_units: 1
     to:
       - 'lxd:0'
-  kubernetes-master:
+  kubernetes-control-plane:
     num_units: 1
-    options:
+#    options:
       # the following hurts platform security against compromised pods/containers, but is needed for rook to setup ceph
-      allow-privileged: 'true'
+#      allow-privileged: 'true'
     to:
       - '0'
   kubernetes-worker:
-    num_units: 3
+    num_units: 4
     options:
       ingress: 'true'
     to:
       - '1'
       - '2'
       - '3'
+      - '4'
   #    bluestore: 'True'
   #    bluestore-db: '/dev/nvme1n1'
-  #    osd-devices: '/dev/sdb /dev/sdc /dev/sdd /dev/sde /dev/sdf /dev/nvme2n1'
+  #    osd-devices: '/dev/sda /dev/sdb /dev/sdc /dev/sdd /dev/sde /dev/sdf /dev/nvme2n1'
 machines:
   '0':
-    series: focal
+    series: jammy
   '1':
-    series: focal
+    series: jammy
   '2':
-    series: focal
+    series: jammy
   '3':
-    series: focal
+    series: jammy
+  '4':
+    series: jammy
