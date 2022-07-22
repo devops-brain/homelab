@@ -33,12 +33,12 @@ applications:
   #    osd-devices: '/dev/sda /dev/sdb /dev/sdc /dev/sdd /dev/sde /dev/sdf /dev/nvme2n1'
 machines:
   '0':
-    series: jammy
+    series: focal
   '1':
-    series: jammy
+    series: focal
   '2':
-    series: jammy
+    series: focal
   '3':
-    series: jammy
+    series: focal
   '4':
-    series: jammy
+    series: focal
