@@ -11,7 +11,7 @@ applications:
   kubeapi-load-balancer:
     num_units: 1
     to:
-      - 'lxd:0'
+      - 'lxd:4'
   kubernetes-control-plane:
     num_units: 1
 #    options:
