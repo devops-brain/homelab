@@ -32,7 +32,7 @@ pipeline {
         echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
         echo "TODO:  refactor"
         sh "mkdir -p ~/.kube"
-        sh "juju scp kubernetes-master/0:config ~/.kube/config"
+        sh "juju scp kubernetes-control-plane/0:config ~/.kube/config"
       }
     }
   }
