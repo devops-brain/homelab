@@ -1,7 +1,4 @@
 applications:
-  containerd:
-    options:
-      channel: '1.24/edge'
   easyrsa:
     to:
       - 'lxd:0'
@@ -23,7 +20,7 @@ applications:
     to:
       - '0'
   kubernetes-worker:
-    num_units: 3
+    num_units: 6
     options:
       ingress: 'true'
     to:
@@ -44,7 +41,7 @@ applications:
       monitor-count: 3
   ceph-osd:
     charm: cs:ceph-osd
-    num-units: 6
+    num_units: 6
     to:
       - '1'
       - '2'
