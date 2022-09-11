@@ -11,11 +11,13 @@ pipeline {
               if [ "$(juju list-models | grep kube | wc -l)" == "0" ]; then
                   juju add-model kube HomeLab
                   juju model-config -m kube default-series=focal
-                  juju add-machine -m kube zotac-mini-01.khoyi.io
-                  juju add-machine -m kube stable-owl.khoyi.io
+                  juju add-machine -m kube nice-lark.khoyi.io
                   juju add-machine -m kube casual-corgi.khoyi.io
+                  juju add-machine -m kube stable-owl.khoyi.io
+                  juju add-machine -m kube nice-chimp.khoyi.io
                   juju add-machine -m kube loving-cattle.khoyi.io
                   juju add-machine -m kube golden-tiger.khoyi.io
+                  juju add-machine -m kube new-machine.khoyi.io
               fi'''
       }
     }

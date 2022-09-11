@@ -163,7 +163,7 @@ config juju
         auth-types: [oauth1]
         endpoint: http://192.168.76.4:5240/MAAS
     ''' > /tmp/maas.yaml
-    juju add-cloud --local HomeLab /tmp/maas.yaml
+    juju add-cloud --client HomeLab /tmp/maas.yaml
     juju clouds
     echo '''credentials:
       HomeLab:
@@ -173,12 +173,11 @@ config juju
     ''' > /tmp/juju.yaml
     juju add-credential HomeLab -f /tmp/juju.yaml
     juju credentials
-    juju credentials --local
     juju clouds
     
 deploy controller
 
-    #juju bootstrap HomeLab homelab --bootstrap-series=focal --config autocert-dns-name=juju.khoyi.io --config default-series=focal
-    juju bootstrap HomeLab homelab --bootstrap-series=focal --config default-series=focal
+    #juju bootstrap HomeLab homelab --bootstrap-series=jammy --config autocert-dns-name=juju.khoyi.io --config default-series=jammy
+    juju bootstrap HomeLab homelab --bootstrap-series=jammy --config default-series=jammy
     juju gui
 
