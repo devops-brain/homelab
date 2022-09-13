@@ -7,7 +7,7 @@ pipeline {
     stage('bootstrap cluster if missing'){
       steps {
         echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
-        sh '''echo "if the model doesn't exist, bootstrap it"
+        echo '''echo "if the model doesn't exist, bootstrap it"
               if [ "$(juju list-models | grep kube | wc -l)" == "0" ]; then
                   juju add-model kube HomeLab
                   juju model-config -m kube default-series=focal
