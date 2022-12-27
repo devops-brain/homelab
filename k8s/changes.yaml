@@ -14,9 +14,9 @@ applications:
       - 'lxd:0'
   kubernetes-control-plane:
     num_units: 1
-#    options:
+    #options:
       # the following hurts platform security against compromised pods/containers, but is needed for rook to setup ceph
-#      allow-privileged: 'true'
+    #  allow-privileged: 'true'
     to:
       - '0'
   kubernetes-worker:
@@ -31,7 +31,8 @@ applications:
       - '5'
       - '6'
   ceph-mon:
-    charm: cs:ceph-mon
+    charm: ceph-mon
+    channel: quincy/stable
     num_units: 3
     to:
       - 'lxd:1'
@@ -40,7 +41,8 @@ applications:
     options:
       monitor-count: 3
   ceph-osd:
-    charm: cs:ceph-osd
+    charm: ceph-osd
+    channel: quincy/stable
     num_units: 6
     to:
       - '1'
@@ -53,13 +55,28 @@ applications:
       bluestore: 'True'
       bluestore-db: '/dev/nvme1n1'
       osd-devices: '/dev/sda /dev/sdb /dev/sdc /dev/sdd /dev/sde /dev/sdf /dev/nvme2n1'
+  ceph-fs:
+    charm: ceph-fs
+    channel: quincy/stable
+    num_units: 3
+    to:
+      - 'lxd:1'
+      - 'lxd:2'
+      - 'lxd:3'
+    options:
+      ec-profile-device-class: hdd
+      ec-profile-k: 4
+      ec-profile-m: 2
+      pool-type: 'erasure-coded'
 relations:
   - - ceph-osd:mon
     - ceph-mon:osd
-#  - - ceph-mon:admin
-#    - kubernetes-control-plane
-#  - - ceph-mon:client
-#    - kubernetes-control-plane
+  - - ceph-fs:ceph-mds
+    - ceph-mon:mds
+  - - ceph-mon:admin
+    - kubernetes-control-plane
+  - - ceph-mon:client
+    - kubernetes-control-plane
 machines:
   '0':
     series: jammy
