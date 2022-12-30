@@ -64,10 +64,11 @@ applications:
       - 'lxd:2'
       - 'lxd:3'
     options:
+      pool-type: 'erasure-coded'
       ec-profile-device-class: hdd
+      ec-profile-crush-locality: host
       ec-profile-k: 4
       ec-profile-m: 2
-      pool-type: 'erasure-coded'
 relations:
   - - ceph-osd:mon
     - ceph-mon:osd

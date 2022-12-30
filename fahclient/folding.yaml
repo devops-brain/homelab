@@ -17,7 +17,7 @@ spec:
   resources:
     requests:
       storage: 1Gi
-  storageClassName: ceph-fs-replicated
+  storageClassName: cephfs
 ---
 apiVersion: apps/v1
 kind: DaemonSet
