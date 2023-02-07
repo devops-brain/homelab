@@ -18,7 +18,7 @@ monitoring:
   enabled: false
 
 # If true, create & use PSP resources. Set this to the same value as the rook-ceph chart.
-pspEnable: true
+#pspEnable: true
 
 cephClusterSpec:
   skipUpgradeChecks: false
@@ -49,7 +49,7 @@ cephClusterSpec:
         memory: "1Gi"
       limits:
         cpu: "500m"
-        memory: "14Gi"
+        memory: "16Gi"
   #   prepareosd:
   #   mgr-sidecar:
   #   crashcollector:
@@ -106,7 +106,7 @@ cephBlockPools:
 
 
 cephFileSystems:
-  - name: ceph-filesystem
+  - name: cephfs
     # see https://github.com/rook/rook/blob/master/Documentation/ceph-filesystem-crd.md#filesystem-settings for available configuration
     spec:
       metadataPool:
@@ -116,17 +116,17 @@ cephFileSystems:
         deviceClass: ssd
       dataPools:
         - erasureCoded:
-            dataChunks: 2
-            codingChunks: 1
+            dataChunks: 4
+            codingChunks: 2
           failureDomain: host
           deviceClass: hdd
       metadataServer:
-        activeCount: 1
+        activeCount: 3
         activeStandby: true
     storageClass:
       enabled: true
       isDefault: false
-      name: ceph-filesystem
+      name: cephfs
       reclaimPolicy: Delete
       allowVolumeExpansion: true
       # see https://github.com/rook/rook/blob/master/Documentation/ceph-filesystem.md#provision-storage for available configuration
@@ -152,7 +152,7 @@ cephFileSystems:
             size: 3
           deviceClass: hdd
       metadataServer:
-        activeCount: 1
+        activeCount: 3
         activeStandby: true
     storageClass:
       enabled: true

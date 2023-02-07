@@ -4,6 +4,13 @@ pipeline {
   }
 
   stages {
+    stage('deploy demo environment'){
+      steps {
+        echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+        sh "#kubectl apply -f common/demo/mysql.yaml \
+                          -f common/demo/wordpress.yaml --wait=true"
+      }
+    }
     stage('deploy monitoring'){
       steps {
         echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
