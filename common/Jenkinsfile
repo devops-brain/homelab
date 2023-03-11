@@ -7,26 +7,25 @@ pipeline {
     stage('deploy demo environment'){
       steps {
         echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
-        sh "#kubectl apply -f common/demo/mysql.yaml \
-                          -f common/demo/wordpress.yaml --wait=true"
+        sh "#kubectl apply -f common/demo/mysql.yaml -f common/demo/wordpress.yaml --wait=true"
       }
     }
     stage('deploy monitoring'){
       steps {
         echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
-        sh "helm repo add grafana https://grafana.github.io/helm-charts"
-        sh "helm repo add prometheus-community https://prometheus-community.github.io/helm-charts"
-        sh "helm repo update"
-        sh "helm upgrade -i prometheus prometheus-community/kube-prometheus-stack"
+        sh "#helm repo add grafana https://grafana.github.io/helm-charts"
+        sh "#helm repo add prometheus-community https://prometheus-community.github.io/helm-charts"
+        sh "#helm repo update"
+        sh "#helm upgrade -i prometheus prometheus-community/kube-prometheus-stack"
       }
     }
     stage('deploy stackgres custom resource definitions'){
       steps {
         echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
-        sh "kubectl apply -f common/stackgres-namespace.yaml --wait=true"
-        sh "helm repo add stackgres-charts https://stackgres.io/downloads/stackgres-k8s/stackgres/helm/"
-        sh "helm repo update"
-        sh "helm upgrade -i --namespace stackgres-operator stackgres-operator --set-string admin.ui.service.type=ClusterIP https://stackgres.io/downloads/stackgres-k8s/stackgres/latest/helm/stackgres-operator.tgz"
+        sh "#kubectl apply -f common/stackgres-namespace.yaml --wait=true"
+        sh "#helm repo add stackgres-charts https://stackgres.io/downloads/stackgres-k8s/stackgres/helm/"
+        sh "#helm repo update"
+        sh "#helm upgrade -i --namespace stackgres-operator stackgres-operator --set-string admin.ui.service.type=ClusterIP https://stackgres.io/downloads/stackgres-k8s/stackgres/latest/helm/stackgres-operator.tgz"
         sh "echo 'TODO:  check and wait for stackgres config to finish'"
       }
     }
