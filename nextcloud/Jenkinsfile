@@ -16,7 +16,7 @@ pipeline {
         sh "helm repo add nextcloud https://nextcloud.github.io/helm/"
         sh "helm repo update"
         echo """helm install my-nextcloud nextcloud/nextcloud --namespace nextcloud \
-            --set image.tag=21.0.0 \
+            --set image.tag=25 \
             --set internalDatabase.enabled=false \
             --set externalDatabase.enabled=true \
             --set externalDatabase.type=postgresql \
