@@ -16,7 +16,7 @@ pipeline {
         sh "helm repo add grafana https://grafana.github.io/helm-charts"
         sh "helm repo add prometheus-community https://prometheus-community.github.io/helm-charts"
         sh "helm repo update"
-        sh "helm upgrade -i --namespace monitoring --create-namespace prometheus-operator prometheus-community/kube-prometheus-stack"
+        sh "export HELM_DRIVER=configmap && helm upgrade -i --namespace monitoring --create-namespace prometheus-operator prometheus-community/kube-prometheus-stack"
       }
     }
     stage('deploy stackgres custom resource definitions'){
