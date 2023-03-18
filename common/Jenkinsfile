@@ -22,7 +22,7 @@ pipeline {
     stage('deploy stackgres custom resource definitions'){
       steps {
         echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
-        sh "kubectl apply -f 'https://sgres.io/install?namespace=stackgres&adminui-service-type=ClusterIP&grafana-autoEmbed=true'"
+        sh "#kubectl apply -f 'https://sgres.io/install?namespace=stackgres&adminui-service-type=ClusterIP&grafana-autoEmbed=true'"
         sh "#helm repo add stackgres-charts https://stackgres.io/downloads/stackgres-k8s/stackgres/helm/"
         sh "#helm repo update"
         sh "#helm upgrade -i --namespace stackgres-operator --create-namespace stackgres-operator \
