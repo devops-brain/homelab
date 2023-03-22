@@ -6,4 +6,4 @@ postgres:
 storage:
   size: '32Gi'
   class: 'ceph-clock'
-
+sgInstanceProfile: 'size-xs'

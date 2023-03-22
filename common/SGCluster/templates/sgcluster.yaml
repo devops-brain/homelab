@@ -3,12 +3,13 @@ kind: SGCluster
 metadata:
   name:  {{ .Values.cluster_name }}
 spec:
-  instances: {{ .Values.instance_count}}
+  instances: {{ .Values.instance_count }}
   postgres:
-    version: {{ .Values.postgres.version}}
+    version: "{{ .Values.postgres.version }}"
     extensions:
-      - name: hstore
-    pods:
-      persistentVolume:
-        size: {{ .Values.storage.size }}
-        storageClass: {{ .Values.storage.class }}
+      - name: 'hstore'
+  pods:
+    persistentVolume:
+      size: "{{ .Values.storage.size }}"
+      storageClass: "{{ .Values.storage.class }}"
+  sgInstanceProfile: "{{ .Values.sgInstanceProfile }}"
