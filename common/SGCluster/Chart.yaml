@@ -1,0 +1,10 @@
+apiVersion: v2
+name: sgcluster
+description: A stackgres cluster
+type: application???
+version: 0.1.0
+appVersion: 14.0.0
+keywords:
+  - postgres
+  - stackgres
+  - db

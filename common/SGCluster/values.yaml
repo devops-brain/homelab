@@ -1,0 +1,9 @@
+
+cluster_name: 'postgres'
+instance_count: 3
+postgres:
+  version: '14'
+storage:
+  size: '32Gi'
+  class: 'ceph-clock'
+

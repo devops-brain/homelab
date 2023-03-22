@@ -7,7 +7,8 @@ pipeline {
     stage('deploy postgres cluster for nextcloud'){
       steps {
         echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
-        sh ""
+        sh "helm upgrade -i --create-namespace --namespace nextcloud nextcloudsql ./common/SGCluster/ \
+            --set cluster_name=nextcloudsql"
       }
     }
     stage('deploy nextcloud'){
@@ -15,23 +16,34 @@ pipeline {
         echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
         sh "helm repo add nextcloud https://nextcloud.github.io/helm/"
         sh "helm repo update"
-        echo """helm install my-nextcloud nextcloud/nextcloud --namespace nextcloud \
+        echo """helm upgrade -i --create-namespace --namespace nextcloud nextcloud nextcloud/nextcloud \
             --set image.tag=25 \
+            --set ingress.className=nginx \
+            --set ingress.enabled=true \
+            --set nextcloud.host=nextcloud.khoyi.io \
+            --set nextcloud.username=brian \
             --set internalDatabase.enabled=false \
             --set externalDatabase.enabled=true \
             --set externalDatabase.type=postgresql \
-            --set externalDatabase.host="nextcloud-postgresql"  \
+            --set externalDatabase.host="<stackgres-dns:port>"  \
             --set externalDatabase.database=nextcloud \
+            --set externalDatabase.user=nextcloud \
             --set externalDatabase.existingSecret.enabled=true \
-            --set externalDatabase.existingSecret.secretName=nextcloud-postgresql \
-            --set externalDatabase.existingSecret.usernameKey=postgresql-username \
-            --set externalDatabase.existingSecret.passwordKey=postgresql-password \
-            --set persistence.enabled=true \
-            --set persistence.existingClaim=pvc-nextcloud \
+            --set externalDatabase.existingSecret.secretName=<stackgres-secret> \
+            --set externalDatabase.existingSecret.usernameKey=<stackgres-user-key> \
+            --set externalDatabase.existingSecret.passwordKey=<stackgres-password-key>> \
+            --set redis.enabled=true \
             --set cronjob.enabled=true \
             --set cronjob.schedule="*/15 * * * *" \
             --set service.type=ClusterIP \
-            --set service.nodePort=32123 """
+            --set persistence.enabled=true \
+            --set persistance.nextcloudData.storageClass=cephfs \
+            --set persistance.nextcloudData.size=1024Ti \
+            --set rbac.enabled=true \
+            --set hpa.enabled=true \
+            --set hpa.minPods=3 \
+            --set hpa.maxPods=12 \
+            --set metrics.enabled=true"""
       }
     }
   }
