@@ -7,9 +7,9 @@ pipeline {
     stage('deploy postgres cluster for nextcloud'){
       steps {
         echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
-        sh "helm upgrade -i --create-namespace --namespace nextcloud nextcloudsql ./common/SGCluster/ \
-            --set cluster_name=nextcloudsql \
-            --atomic --timeout 300s "
+        sh "#helm upgrade -i --create-namespace --namespace nextcloud nextcloudsql ./common/SGCluster/ \
+            #--set cluster_name=nextcloudsql \
+            #--atomic --timeout 300s "
       }
     }
     stage('deploy nextcloud'){

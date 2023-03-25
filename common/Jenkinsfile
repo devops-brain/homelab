@@ -35,10 +35,10 @@ pipeline {
             #            --set-string grafana.secretPasswordKey=admin-password \
             #            --set-string adminui.service.type=ClusterIP \
             #            stackgres-charts/stackgres-operator"
-        sh "kubectl describe deployment -n stackgres stackgres-operator"
-        sh "kubectl describe deployment -n stackgres stackgres-restapi"
-        sh "kubectl wait -n stackgres deployment/stackgres-operator --for condition=Available"
-        sh "kubectl wait -n stackgres deployment/stackgres-restapi --for condition=Available"
+        sh "#kubectl describe deployment -n stackgres stackgres-operator"
+        sh "#kubectl describe deployment -n stackgres stackgres-restapi"
+        sh "#kubectl wait -n stackgres deployment/stackgres-operator --for condition=Available"
+        sh "#kubectl wait -n stackgres deployment/stackgres-restapi --for condition=Available"
       }
     }
   }
