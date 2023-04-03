@@ -26,13 +26,10 @@ pipeline {
             --set internalDatabase.enabled=false \
             --set externalDatabase.enabled=true \
             --set externalDatabase.type=postgresql \
-            --set externalDatabase.host="<stackgres-dns:port>"  \
+            --set externalDatabase.host="zotac-mini-01.khoyi.io:5432"  \
             --set externalDatabase.database=nextcloud \
             --set externalDatabase.user=nextcloud \
-            --set externalDatabase.existingSecret.enabled=true \
-            --set externalDatabase.existingSecret.secretName=<stackgres-secret> \
-            --set externalDatabase.existingSecret.usernameKey=<stackgres-user-key> \
-            --set externalDatabase.existingSecret.passwordKey=<stackgres-password-key>> \
+            --set externalDatabase.password=gDK1q0JvNq0sOWl0 \
             --set redis.enabled=true \
             --set cronjob.enabled=true \
             --set cronjob.schedule="*/15 * * * *" \
