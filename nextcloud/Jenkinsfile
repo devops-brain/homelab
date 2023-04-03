@@ -17,7 +17,7 @@ pipeline {
         echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
         sh "helm repo add nextcloud https://nextcloud.github.io/helm/"
         sh "helm repo update"
-        echo """helm upgrade -i --create-namespace --namespace nextcloud nextcloud nextcloud/nextcloud \
+        sh """helm upgrade -i --create-namespace --namespace nextcloud nextcloud nextcloud/nextcloud \
             --set image.tag=25 \
             --set ingress.className=nginx \
             --set ingress.enabled=true \
