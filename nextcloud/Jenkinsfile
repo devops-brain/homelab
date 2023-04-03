@@ -35,6 +35,7 @@ pipeline {
             --set cronjob.schedule="*/15 * * * *" \
             --set service.type=ClusterIP \
             --set persistence.enabled=true \
+            --set persistance.size=1024Ti \
             --set persistance.nextcloudData.storageClass=cephfs \
             --set persistance.nextcloudData.size=1024Ti \
             --set rbac.enabled=true \
