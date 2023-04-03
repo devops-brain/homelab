@@ -18,8 +18,8 @@ pipeline {
         sh "helm repo add nextcloud https://nextcloud.github.io/helm/"
         sh "helm repo update"
         sh """helm upgrade -i --create-namespace --namespace nextcloud nextcloud nextcloud/nextcloud \
-            --version 3.5.3 \
-            --set image.tag='26' \
+            --version 3.5.2 \
+            --set image.tag="26" \
             --set ingress.className=nginx \
             --set ingress.enabled=true \
             --set nextcloud.host=nextcloud.khoyi.io \
