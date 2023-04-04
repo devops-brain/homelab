@@ -31,7 +31,7 @@ pipeline {
             --set externalDatabase.user=nextcloud \
             --set externalDatabase.password=gDK1q0JvNq0sOWl0 \
             --set redis.enabled=true \
-            --set cronjob.enabled=true \
+            --set cronjob.enabled=false \
             --set cronjob.schedule="*/15 * * * *" \
             --set service.type=ClusterIP \
             --set persistence.enabled=true \
