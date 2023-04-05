@@ -30,7 +30,7 @@ pipeline {
             --set externalDatabase.database=nextcloud \
             --set externalDatabase.user=nextcloud \
             --set externalDatabase.password=gDK1q0JvNq0sOWl0 \
-            --set redis.enabled=true \
+            --set redis.enabled=false \
             --set cronjob.enabled=false \
             --set cronjob.schedule="*/15 * * * *" \
             --set service.type=ClusterIP \
@@ -40,7 +40,7 @@ pipeline {
             --set persistance.nextcloudData.size=1024Ti \
             --set rbac.enabled=true \
             --set hpa.enabled=true \
-            --set hpa.minPods=3 \
+            --set hpa.minPods=1 \
             --set hpa.maxPods=12 \
             --set metrics.enabled=true"""
       }
