@@ -21,6 +21,7 @@ pipeline {
             --version 3.5.4 \
             --set ingress.className=nginx \
             --set ingress.enabled=true \
+            --set image.flavor=fpm \
             --set nextcloud.host=nextcloud.khoyi.io \
             --set nextcloud.username=brian \
             --set internalDatabase.enabled=false \
