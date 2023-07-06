@@ -9,15 +9,29 @@ pipeline {
         echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
         echo '''echo "if the model doesn't exist, bootstrap it"
               if [ "$(juju list-models | grep kube | wc -l)" == "0" ]; then
-                  juju add-model kube HomeLab
-                  juju model-config -m kube default-series=focal
-                  juju add-machine -m kube nice-lark.khoyi.io
-                  juju add-machine -m kube casual-corgi.khoyi.io
-                  juju add-machine -m kube stable-owl.khoyi.io
-                  juju add-machine -m kube nice-chimp.khoyi.io
-                  juju add-machine -m kube loving-cattle.khoyi.io
-                  juju add-machine -m kube golden-tiger.khoyi.io
-                  juju add-machine -m kube new-machine.khoyi.io
+                juju add-model kube HomeLab
+                sleep 6s
+                juju model-config -m kube container-image-stream=daily
+                sleep 1s
+                # 3.x  juju model-config -m kube default-series=Jammy
+                juju model-config -m kube default-series=jammy
+                sleep 1s
+                juju add-machine -m kube nice-lark.khoyi.io
+                sleep 6s
+                juju add-machine -m kube casual-corgi.khoyi.io
+                sleep 60s
+                juju add-machine -m kube stable-owl.khoyi.io
+                sleep 60s
+                juju add-machine -m kube nice-chimp.khoyi.io
+                sleep 6s
+                juju add-machine -m kube loving-cattle.khoyi.io
+                sleep 60s
+                juju add-machine -m kube golden-tiger.khoyi.io
+                sleep 60s
+                juju add-machine -m kube solid-buck.khoyi.io
+                sleep 6s
+                juju deploy -m kube --map-machines=existing charmed-kubernetes --channel 1.27/stable --overlay k8s/changes.yaml --overlay k8s/addceph.yaml
+                #juju deploy -m kube --map-machines=existing charmed-kubernetes --channel 1.27/stable --overlay k8s/changes.yaml
               fi'''
       }
     }
