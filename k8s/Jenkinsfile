@@ -39,7 +39,7 @@ pipeline {
       steps {
         echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
         sh "##bash -c 'juju deploy -m kube --map-machines=existing charmed-kubernetes --channel 1.27/edge --overlay k8s/flannel.yaml --overlay k8s/changes.yaml'"
-        sh "bash -c 'juju deploy -m kube --map-machines=existing charmed-kubernetes --channel 1.27/stable --overlay k8s/changes.yaml --overlay k8s/addceph.yaml'"
+        sh "bash -c 'juju deploy -m kube --map-machines=existing charmed-kubernetes --channel 1.27/stable --overlay k8s/changes.yaml'"
         sh "./k8s/juju-block-io.sh"
         echo "I'll need to test if the kubernetes-master charm switches to active prematurely, but this should block IO until the deployment is complete."
       }
