@@ -1,0 +1,134 @@
+pipeline {
+  agent {
+    label "workstation"
+  }
+  stages {
+    stage('Run OS Updates') {
+      parallel {
+        stage('update the juju controller') {
+          steps {
+            echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+            sh "##juju ssh -m 'homelab:admin/controller' 0 'sudo apt update && sudo apt dist-upgrade -y && sudo apt autoremove -y && sudo snap refresh'"
+            sh "juju ssh -m 'homelab:admin/controller' 0 'sudo apt update && sudo apt dist-upgrade -y && sudo apt autoremove -y && sudo snap refresh'"
+            echo "the juju controller is updated, rebooting to follow."
+          }
+        }
+        stage('update easyrsa') {
+          steps {
+            echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+            sh "##juju ssh easyrsa/0 'sudo apt update && sudo apt dist-upgrade -y && sudo apt autoremove -y && sudo snap refresh'"
+            sh "juju ssh easyrsa/0 'sudo apt update && sudo apt dist-upgrade -y && sudo apt autoremove -y && sudo snap refresh'"
+            echo "easyrsa is updated, but we may need to arrange rebooting."
+          }
+        }
+        stage('update etcd/0') {
+          steps {
+            echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+            sh "##juju ssh etcd/0 'sudo apt update && sudo apt dist-upgrade -y && sudo apt autoremove -y && sudo snap refresh'"
+            sh "juju ssh etcd/0 'sudo apt update && sudo apt dist-upgrade -y && sudo apt autoremove -y && sudo snap refresh'"
+            echo "etcd/0 is updated, but we may need to arrange rebooting."
+          }
+        }
+        stage('update etcd/1') {
+          steps {
+            echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+            sh "##juju ssh etcd/1 'sudo apt update && sudo apt dist-upgrade -y && sudo apt autoremove -y && sudo snap refresh'"
+            sh "juju ssh etcd/1 'sudo apt update && sudo apt dist-upgrade -y && sudo apt autoremove -y && sudo snap refresh'"
+            echo "etcd/1 is updated, but we may need to arrange rebooting."
+          }
+        }
+        stage('update etcd/2') {
+          steps {
+            echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+            sh "##juju ssh etcd/2 'sudo apt update && sudo apt dist-upgrade -y && sudo apt autoremove -y && sudo snap refresh'"
+            sh "juju ssh etcd/2 'sudo apt update && sudo apt dist-upgrade -y && sudo apt autoremove -y && sudo snap refresh'"
+            echo "etcd/2 is updated, but we may need to arrange rebooting."
+          }
+        }
+        stage('update kubeapi-load-balancer/0') {
+          steps {
+            echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+            sh "##juju ssh kubeapi-load-balancer/0 'sudo apt update && sudo apt dist-upgrade -y && sudo apt autoremove -y && sudo snap refresh'"
+            sh "juju ssh kubeapi-load-balancer/0 'sudo apt update && sudo apt dist-upgrade -y && sudo apt autoremove -y && sudo snap refresh'"
+            echo "kubeapi-load-balancer/0 is updated, but we may need to arrange rebooting."
+          }
+        }
+        stage('update kubernetes-control-plane/0') {
+          steps {
+            echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+            sh "##juju ssh kubernetes-control-plane/0 'sudo apt update && sudo apt dist-upgrade -y && sudo apt autoremove -y && sudo snap refresh'"
+            sh "juju ssh kubernetes-control-plane/0 'sudo apt update && sudo apt dist-upgrade -y && sudo apt autoremove -y && sudo snap refresh'"
+            echo "kubernetes-control-plane/0 is updated, but we may need to arrange rebooting."
+          }
+        }
+        stage('update kubernetes-worker/0') {
+          steps {
+            echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+            sh "##juju ssh kubernetes-worker/0 'sudo apt update && sudo apt dist-upgrade -y && sudo apt autoremove -y && sudo snap refresh'"
+            sh "juju ssh kubernetes-worker/0 'sudo apt update && sudo apt dist-upgrade -y && sudo apt autoremove -y && sudo snap refresh'"
+            echo "kubernetes-worker/0 is updated, but we may need to arrange rebooting."
+          }
+        }
+        stage('update kubernetes-worker/1') {
+          steps {
+            echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+            sh "##juju ssh kubernetes-worker/1 'sudo apt update && sudo apt dist-upgrade -y && sudo apt autoremove -y && sudo snap refresh'"
+            sh "juju ssh kubernetes-worker/1 'sudo apt update && sudo apt dist-upgrade -y && sudo apt autoremove -y && sudo snap refresh'"
+            echo "kubernetes-worker/1 is updated, but we may need to arrange rebooting."
+          }
+        }
+        stage('update kubernetes-worker/2') {
+          steps {
+            echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+            sh "##juju ssh kubernetes-worker/2 'sudo apt update && sudo apt dist-upgrade -y && sudo apt autoremove -y && sudo snap refresh'"
+            sh "juju ssh kubernetes-worker/2 'sudo apt update && sudo apt dist-upgrade -y && sudo apt autoremove -y && sudo snap refresh'"
+            echo "kubernetes-worker/2 is updated, but we may need to arrange rebooting."
+          }
+        }
+        stage('update kubernetes-worker/3') {
+          steps {
+            echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+            sh "##juju ssh kubernetes-worker/3 'sudo apt update && sudo apt dist-upgrade -y && sudo apt autoremove -y && sudo snap refresh'"
+            sh "juju ssh kubernetes-worker/3 'sudo apt update && sudo apt dist-upgrade -y && sudo apt autoremove -y && sudo snap refresh'"
+            echo "kubernetes-worker/3 is updated, but we may need to arrange rebooting."
+          }
+        }
+        stage('update kubernetes-worker/4') {
+          steps {
+            echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+            sh "##juju ssh kubernetes-worker/4 'sudo apt update && sudo apt dist-upgrade -y && sudo apt autoremove -y && sudo snap refresh'"
+            sh "juju ssh kubernetes-worker/4 'sudo apt update && sudo apt dist-upgrade -y && sudo apt autoremove -y && sudo snap refresh'"
+            echo "kubernetes-worker/4 is updated, but we may need to arrange rebooting."
+          }
+        }
+        stage('update kubernetes-worker/5') {
+          steps {
+            echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+            sh "##juju ssh kubernetes-worker/5 'sudo apt update && sudo apt dist-upgrade -y && sudo apt autoremove -y && sudo snap refresh'"
+            sh "juju ssh kubernetes-worker/5 'sudo apt update && sudo apt dist-upgrade -y && sudo apt autoremove -y && sudo snap refresh'"
+            echo "kubernetes-worker/5 is updated, but we may need to arrange rebooting."
+          }
+        }
+      }
+    }
+    stage('initiate reboot') {
+      steps {
+        echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+        sh "juju ssh -m 'homelab:admin/controller' 0 'sudo shutdown -r +1'"
+        sh "juju ssh easyrsa/0 'sudo shutdown -r +2'"
+        sh "juju ssh etcd/0 'sudo shutdown -r +2'"
+        sh "juju ssh etcd/1 'sudo shutdown -r +12'"
+        sh "juju ssh etcd/2 'sudo shutdown -r +22'"
+        sh "juju ssh kubeapi-load-balancer/0 'sudo shutdown -r +2'"
+        sh "juju ssh kubernetes-control-plane/0 'sudo shutdown -r +3'"
+        sh "juju ssh kubernetes-worker/0 'sudo shutdown -r +3'"
+        sh "juju ssh kubernetes-worker/1 'sudo shutdown -r +13'"
+        sh "juju ssh kubernetes-worker/2 'sudo shutdown -r +23'"
+        sh "juju ssh kubernetes-worker/3 'sudo shutdown -r +8'"
+        sh "juju ssh kubernetes-worker/4 'sudo shutdown -r +18'"
+        sh "juju ssh kubernetes-worker/5 'sudo shutdown -r +28'"
+        echo "cluster rebooted."
+      }
+    }
+  }
+}
