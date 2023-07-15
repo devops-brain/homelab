@@ -3,12 +3,12 @@ pipeline {
     label "workstation"
   }
   stages {
-    stage('update the network controller'){
+    stage('update the juju controller') {
       steps {
         echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
-        sh "##ssh -Y malkav@nuc5ppyh-01.khoyi.io 'sudo apt update && sudo apt dist-upgrade -y && sudo apt autoremove -y && sudo snap refresh'"
-        sh "ssh -Y malkav@nuc5ppyh-01.khoyi.io 'sudo apt update && sudo apt dist-upgrade -y && sudo apt autoremove -y && sudo snap refresh'"
-        echo "the network controller is updated, but we may need to arrange rebooting."
+        sh "##juju ssh -m 'homelab:admin/controller' 0 'sudo apt update && sudo apt dist-upgrade -y && sudo apt autoremove -y && sudo snap refresh'"
+        sh "juju ssh -m 'homelab:admin/controller' 0 'sudo apt update && sudo apt dist-upgrade -y && sudo apt autoremove -y && sudo snap refresh'"
+        echo "the juju controller is updated, rebooting to follow."
       }
     }
     stage('update the KVM server'){
@@ -17,6 +17,14 @@ pipeline {
         sh "##ssh -Y ubuntu@subtle-bengal.khoyi.io 'sudo apt update && sudo apt dist-upgrade -y && sudo apt autoremove -y && sudo snap refresh'"
         sh "ssh -Y ubuntu@subtle-bengal.khoyi.io 'sudo apt update && sudo apt dist-upgrade -y && sudo apt autoremove -y && sudo snap refresh'"
         echo "the KVM server is updated, but we may need to arrange rebooting."
+      }
+    }
+    stage('update the network controller'){
+      steps {
+        echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+        sh "##ssh -Y malkav@nuc5ppyh-01.khoyi.io 'sudo apt update && sudo apt dist-upgrade -y && sudo apt autoremove -y && sudo snap refresh'"
+        sh "ssh -Y malkav@nuc5ppyh-01.khoyi.io 'sudo apt update && sudo apt dist-upgrade -y && sudo apt autoremove -y && sudo snap refresh'"
+        echo "the network controller is updated, but we may need to arrange rebooting."
       }
     }
     stage('update the workstation'){
