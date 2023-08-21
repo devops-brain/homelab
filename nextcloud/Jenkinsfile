@@ -23,7 +23,7 @@ pipeline {
             --set ingress.enabled=true \
             --set image.flavor=fpm \
             --set nextcloud.host=nextcloud.khoyi.io \
-            --set nextcloud.username=brian \
+            --set nextcloud.username=malkav \
             --set internalDatabase.enabled=false \
             --set externalDatabase.enabled=true \
             --set externalDatabase.type=postgresql \
