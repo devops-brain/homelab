@@ -29,8 +29,8 @@ pipeline {
                 sleep 60s
                 juju add-machine -m kube solid-buck.khoyi.io
                 sleep 6s
-                juju deploy -m kube --map-machines=existing charmed-kubernetes --channel 1.27/stable --overlay ./k8s/changes.yaml --overlay ./k8s/addceph.yaml
-                #juju deploy -m kube --map-machines=existing charmed-kubernetes --channel 1.27/stable --overlay ./k8s/changes.yaml
+                juju deploy -m kube --map-machines=existing charmed-kubernetes --channel 1.28/stable --overlay ./k8s/changes.yaml --overlay ./k8s/addceph.yaml
+                #juju deploy -m kube --map-machines=existing charmed-kubernetes --channel 1.28/stable --overlay ./k8s/changes.yaml
               fi'''
       }
     }
@@ -42,8 +42,8 @@ pipeline {
         sh "ls -hal ./"
         sh "ls -hal k8s"
         sh "ls -hal k8s/changes.yaml"
-        sh "##bash -c 'juju deploy -m kube --map-machines=existing charmed-kubernetes --channel 1.27/edge --overlay k8s/flannel.yaml --overlay k8s/changes.yaml'"
-        sh "juju deploy -m kube --map-machines=existing charmed-kubernetes --channel 1.27/stable --overlay k8s/changes.yaml --overlay k8s/addceph.yaml"
+        sh "##bash -c 'juju deploy -m kube --map-machines=existing charmed-kubernetes --channel 1.28/edge --overlay k8s/flannel.yaml --overlay k8s/changes.yaml'"
+        sh "juju deploy -m kube --map-machines=existing charmed-kubernetes --channel 1.28/stable --overlay k8s/changes.yaml --overlay k8s/addceph.yaml"
         sh "./k8s/juju-block-io.sh"
         echo "I'll need to test if the kubernetes-master charm switches to active prematurely, but this should block IO until the deployment is complete."
       }
@@ -51,9 +51,11 @@ pipeline {
     stage('post-deployment config'){
       steps {
         echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
-        echo "TODO:  refactor"
         sh "mkdir -p ~/.kube"
-        sh "juju scp kubernetes-control-plane/0:config ~/.kube/config"
+        sh "mkdir -p ~/kube"
+        sh "juju ssh kubernetes-control-plane/0 cat config > ~/.kube/config"
+        sh "juju ssh kubernetes-control-plane/0 cat config > ~/kube/config"
+        sh "kubectl cluster-info"
       }
     }
   }
