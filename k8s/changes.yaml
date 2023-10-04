@@ -5,17 +5,18 @@ applications:
   etcd:
     num_units: 3
     to:
-      - 'lxd:1'
       - 'lxd:2'
       - 'lxd:3'
+      - 'lxd:4'
   kubeapi-load-balancer:
     num_units: 1
     to:
       - 'lxd:0'
   kubernetes-control-plane:
-    num_units: 1
+    num_units: 2
     to:
       - '0'
+      - '1'
     options:
       # the following hurts platform security against compromised pods/containers, but is needed for rook to setup ceph
       # it is apparently needed for ceph-client and gpu usage, so it is staying until I switch off of juju.
@@ -26,60 +27,12 @@ applications:
     options:
       ingress: 'true'
     to:
-      - '1'
       - '2'
       - '3'
       - '4'
       - '5'
       - '6'
-#  ceph-mon:
-#    charm: ceph-mon
-#    channel: quincy/stable
-#    num_units: 3
-#    to:
-#      - 'lxd:1'
-#      - 'lxd:2'
-#      - 'lxd:3'
-#    options:
-#      monitor-count: 3
-#  ceph-osd:
-#    charm: ceph-osd
-#    channel: quincy/stable
-#    num_units: 6
-#    to:
-#      - '1'
-#      - '2'
-#      - '3'
-#      - '4'
-#      - '5'
-#      - '6'
-#    options:
-#      bluestore: 'True'
-#      bluestore-db: '/dev/nvme1n1'
-#      osd-devices: '/dev/sda /dev/sdb /dev/sdc /dev/sdd /dev/sde /dev/sdf /dev/nvme2n1'
-#  ceph-fs:
-#    charm: ceph-fs
-#    channel: quincy/stable
-#    num_units: 3
-#    to:
-#      - 'lxd:1'
-#      - 'lxd:2'
-#      - 'lxd:3'
-#    options:
-#      pool-type: 'erasure-coded'
-#      ec-profile-device-class: hdd
-#      ec-profile-crush-locality: host
-#      ec-profile-k: 4
-#      ec-profile-m: 2
-#relations:
-#  - - ceph-osd:mon
-#    - ceph-mon:osd
-#  - - ceph-fs:ceph-mds
-#    - ceph-mon:mds
-#  - - ceph-mon:client
-#    - kubernetes-control-plane:ceph-client
-#  - - ceph-mon:admin
-#    - kubernetes-control-plane:ceph-storage
+      - '7'
 machines:
   '0':
     series: jammy
@@ -94,4 +47,6 @@ machines:
   '5':
     series: jammy
   '6':
+    series: jammy
+  '7':
     series: jammy
