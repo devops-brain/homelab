@@ -3,36 +3,32 @@ pipeline {
     label "kubectl"
   }
 
-  stages {
-    stage('installing tools'){
-      steps {
-        echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
-        sh 'echo "TODO:  ensure tools are installed"'
-      }
-    }
-    stage('add helm repo'){
+    stage('add and update helm repo'){
       steps {
         echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
         sh "helm repo add rook-release https://charts.rook.io/release"
-      }
-    }
-    stage('update helm repo'){
-      steps {
-        echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
         sh "helm repo update"
       }
     }
     stage('deploy base ceph rook operator and infra'){
       steps {
         echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
-        sh "helm upgrade -i --create-namespace --namespace rook-ceph --version 1.11 rook-ceph rook-release/rook-ceph"
+        sh "helm upgrade -i rook-ceph rook-release/rook-ceph \
+                 --create-namespace --namespace rook-ceph \
+                 --version 1.12 \
+                 -f ./ceph/operator-values.yaml \
+                 --atomic"
       }
     }
     stage('deploy ceph cluster'){
       steps {
         echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
-        sh "helm upgrade -i --create-namespace --namespace rook-ceph --version 1.11 rook-ceph-cluster \
-                --set operatorNamespace=rook-ceph rook-release/rook-ceph-cluster -f ceph/values-override.yaml"
+        sh "helm upgrade -i rook-ceph-cluster rook-release/rook-ceph-cluster \
+                --create-namespace --namespace rook-ceph-cluster \
+                --version 1.12 \
+                --set operatorNamespace=rook-ceph \
+                -f ./ceph/cluster-values.yaml \
+                --atomic"
       }
     }
   }
