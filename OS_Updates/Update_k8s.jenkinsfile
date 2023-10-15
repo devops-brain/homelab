@@ -61,6 +61,14 @@ pipeline {
             echo "kubernetes-control-plane/0 is updated, but we may need to arrange rebooting."
           }
         }
+        stage('update kubernetes-control-plane/1') {
+          steps {
+            echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+            sh "##juju ssh kubernetes-control-plane/1 'sudo apt update && sudo apt dist-upgrade -y && sudo apt autoremove -y && sudo snap refresh'"
+            sh "juju ssh kubernetes-control-plane/1 'sudo apt update && sudo apt dist-upgrade -y && sudo apt autoremove -y && sudo snap refresh'"
+            echo "kubernetes-control-plane/1 is updated, but we may need to arrange rebooting."
+          }
+        }
         stage('update kubernetes-worker/0') {
           steps {
             echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
@@ -121,6 +129,7 @@ pipeline {
         sh "juju ssh etcd/2 'sudo shutdown -r +22'"
         sh "juju ssh kubeapi-load-balancer/0 'sudo shutdown -r +2'"
         sh "juju ssh kubernetes-control-plane/0 'sudo shutdown -r +3'"
+        sh "juju ssh kubernetes-control-plane/0 'sudo shutdown -r +13'"
         sh "juju ssh kubernetes-worker/0 'sudo shutdown -r +3'"
         sh "juju ssh kubernetes-worker/1 'sudo shutdown -r +13'"
         sh "juju ssh kubernetes-worker/2 'sudo shutdown -r +23'"

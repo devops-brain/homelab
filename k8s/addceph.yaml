@@ -4,9 +4,9 @@ applications:
     channel: quincy/stable
     num_units: 3
     to:
+      - 'lxd:1'
       - 'lxd:2'
       - 'lxd:3'
-      - 'lxd:4'
     options:
       monitor-count: 3
   ceph-osd:
@@ -14,12 +14,12 @@ applications:
     channel: quincy/stable
     num_units: 6
     to:
+      - '1'
       - '2'
       - '3'
       - '4'
       - '5'
       - '6'
-      - '7'
     options:
       bluestore: 'True'
       bluestore-db: '/dev/nvme1n1'
@@ -29,9 +29,9 @@ applications:
     channel: quincy/stable
     num_units: 3
     to:
+      - 'lxd:1'
       - 'lxd:2'
       - 'lxd:3'
-      - 'lxd:4'
     options:
       pool-type: 'erasure-coded'
       ec-profile-device-class: hdd
