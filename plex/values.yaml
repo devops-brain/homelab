@@ -1,0 +1,194 @@
+# The docker image information for the pms application
+image:
+  registry: index.docker.io
+  repository: plexinc/pms-docker
+  # If unset use "latest"
+  tag: "latest"
+  sha: ""
+  pullPolicy: IfNotPresent
+
+global:
+  # Allow parent charts to override registry hostname
+  imageRegistry: ""
+
+ingress:
+  enabled: false
+  ingressClassName: "ingress-nginx"
+  url: "plex.khoyi.io"
+  annotations: {}
+
+pms:
+  storageClassName: ceph-block
+  configStorage: 256Gi
+  resources:
+    limits:
+      cpu: 8
+      memory: 8Gi
+    requests:
+      cpu: 8
+      memory: 8Gi
+
+# A basic image that will convert the configmap to a file in the rclone config volume
+# this is ignored if rclone is not enabled
+initContainer:
+  image:
+    registry: index.docker.io
+    repository: alpine
+    # If unset use latest
+    tag: 3.18.0
+    sha: ""
+    pullPolicy: IfNotPresent
+
+  # A custom script that will be run in an init container to do any setup before the PMS service starts up
+  # This will be run everytime the pod starts, make sure that some mechanism is included to prevent
+  # this from running more than once if it should only be run on the first startup.
+  script: ""
+  ## TODO:  plan backup / restore of config plan AFTER figuring out initial config setup that will run in parallel with terminal's instance
+  ### Example init script that will import a pre-existing pms database if one has not already been setup
+  ### This pms database must be available through a URL (or some other mechanism to be pulled into the container)
+  # script: |-
+  #   #!/bin/sh
+  #   echo "fetching pre-existing pms database to import..."
+  #
+  #   if [ -d "/config/Library" ]; then
+  #     echo "PMS library already exists, exiting."
+  #     exit 0
+  #   fi
+  #
+  #   apk --update add curl
+  #   curl http://example.com/pms.tgz -o pms.tgz
+  #   tar -xvzf pms.tgz -C /config
+  #   cp -r /config/data/Library /config/Library
+  #   rm -rf /config/data pms.tgz
+  #
+  #   echo "Done."
+
+# the settings specific to rclone
+rclone:
+  # if the rclone sidecar should be created
+  enabled: false
+  image:
+    registry: index.docker.io
+    repository: rclone/rclone
+    # If unset use latest
+    tag: 1.62.2
+    sha: ""
+    pullPolicy: IfNotPresent
+  # The name of the secret that contains the rclone configuration file.
+  # The key must be called `rclone.conf` in the secret
+  configSecret: ""
+  # the remote drive that should be mounted using rclone
+  # this must be in the form of `name:[/optional/path]`
+  # this remote will be mounted at `/data/name` in the PMS container
+  remotes: []
+  # if the remote volumes should be mounted as read only
+  readOnly: true
+  # additional arguments to give to rclone when mounting the volume
+  additionalArgs: []
+  resources:
+    limits:
+      cpu: 100m
+      memory: 128Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  create: true
+  automountServiceAccountToken: false
+  annotations: {}
+  name: ""
+
+statefulSet:
+  # optional extra annotations to add to the service resource
+  annotations: {}
+
+service:
+  type: ClusterIP
+  port: 32400
+  # optional extra annotations to add to the service resource
+  annotations: {}
+
+nodeSelector: {}
+tolerations: []
+affinity: {}
+commonLabels: {}
+
+extraEnv:
+  # This claim is optional, and is only used for the first startup of PMS
+  # The claim is obtained from https://www.plex.tv/claim/ is is only valid for a few minutes
+  PLEX_CLAIM: "claim-TxPZeksXEomxwznWzyHv"
+  #   HOSTNAME: "PlexServer"
+  #   TZ: "Etc/UTC"
+  #   PLEX_UPDATE_CHANNEL: "5"
+  #   PLEX_UID: "1001"
+  #   PLEX_GID: "1001"
+  # a list of CIDRs that can use the server without authentication
+# this is only used for the first startup of PMS
+  #   ALLOWED_NETWORKS: "192.168.76.0/22"
+
+extraVolumeMounts:
+  - name: plexbackups
+    mountPath: /srv/backups
+  - name: plexmedia-symlinks
+    mountPath: /media
+  - name: dvr
+    mountPath: /srv/masters_DVR
+  - name: koi-pond
+    mountPath: /srv/masters_koi-pond
+  - name: rose-garden
+    mountPath: /srv/masters_rose-garden
+  - name: dragons-den
+    mountPath: /srv/masters_dragons-den
+  - name: donna-collection
+    mountPath: /srv/masters_donna-collection
+extraVolumes:
+  - name: plexbackups
+    persistentVolumeClaim:
+      claimName: plexbackups
+      readOnly: false
+  - name: plexmedia-symlinks
+    persistentVolumeClaim:
+      claimName: plexmedia-symlinks
+      readOnly: false
+  - name: dvr
+    persistentVolumeClaim:
+      claimName: dvr
+      readOnly: true
+  - name: koi-pond
+    persistentVolumeClaim:
+      claimName: koi-pond
+      readOnly: true
+  - name: rose-garden
+    persistentVolumeClaim:
+      claimName: rose-garden
+      readOnly: true
+  - name: dragons-den
+    persistentVolumeClaim:
+      claimName: dragons-den
+      readOnly: true
+  - name: donna-collection
+    persistentVolumeClaim:
+      claimName: donna-collection
+      readOnly: true
+
+extraContainers: []
+## TODO:  setup jnlp container into this pod???
+# extraContainers:
+#  - name: <container name>
+#    args:
+#      - ...
+#    image: <docker images>
+#    imagePullPolicy: IfNotPresent
+#    resources:
+#      limits:
+#        memory: 128Mi
+#      requests:
+#        cpu: 100m
+#        memory: 128Mi
+#    volumeMounts:
+#      - ...

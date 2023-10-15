@@ -7,12 +7,15 @@ pipeline {
     stage('deploy plex and dependent services'){
       steps {
         echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+        sh "helm repo add plex https://raw.githubusercontent.com/plexinc/pms-docker/gh-pages"
         sh "kubectl apply -f plex/badwolf/plex-namespace.yaml \
                           -f plex/badwolf/plex-pvc.yaml \
-                          -f plex/badwolf/plex-mediaserver.yaml \
                           -f plex/badwolf/plex-jnlp.yaml \
-                          -f plex/badwolf/plex-jnlp-networkpolicy.yaml \
-                          -f plex/badwolf/plex-service.yaml --wait=true"
+                          --wait=true"
+        sh "helm upgrade -i plex plex/plex-media-server \
+                --create-namespace --namespace plex \
+                -f ./plex/values.yaml \
+                --atomic"
       }
     }
   }

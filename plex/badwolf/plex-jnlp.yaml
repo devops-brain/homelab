@@ -27,8 +27,8 @@ spec:
                 fieldRef:
                   fieldPath: spec.nodeName
             - name: jenkins_master
-              value: "http://192.168.77.2:8080"
-          command: ["jenkins-slave", "-url", "http://192.168.77.2:8080", "-workDir=/home/jenkins/agent", "02781a4306f9d9cfe6b995212308fa802b0b0623a00010bae4d4e5af9463c1a5", "k8s-plex"]
+              value: "http://192.168.77.0:8080"
+          command: ["jenkins-slave", "-url", "http://192.168.77.0:8080", "-workDir=/home/jenkins/agent", "02781a4306f9d9cfe6b995212308fa802b0b0623a00010bae4d4e5af9463c1a5", "k8s-plex"]
           resources:
             limits:
               cpu: "100m"
@@ -36,9 +36,6 @@ spec:
             requests:
               cpu: "100m"
               memory: 1Gi
-          ports:
-            - containerPort: 32400
-              name: plex
           volumeMounts:
             - name: plexbackups
               mountPath: /srv/backups
@@ -54,10 +51,6 @@ spec:
               mountPath: /srv/masters_dragons-den
             - name: donna-collection
               mountPath: /srv/masters_donna-collection
-            - name: roger-roger
-              mountPath: /srv/masters_roger-roger
-            - name: legacy
-              mountPath: /srv/nfs
       volumes:
         - name: plexbackups
           persistentVolumeClaim:
@@ -87,12 +80,4 @@ spec:
           persistentVolumeClaim:
             claimName: donna-collection
             readOnly: false
-        - name: roger-roger
-          persistentVolumeClaim:
-            claimName: roger-roger
-            readOnly: false
-        - name: legacy
-          nfs:
-            server: 192.168.77.2
-            path: /srv/nfs
 
