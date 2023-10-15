@@ -3,6 +3,7 @@ pipeline {
     label "kubectl"
   }
 
+  stages {
     stage('add and update helm repo'){
       steps {
         echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
@@ -31,5 +32,5 @@ pipeline {
                 --atomic"
       }
     }
-
+  }
 }
