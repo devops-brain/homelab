@@ -3,7 +3,7 @@ image:
   registry: index.docker.io
   repository: plexinc/pms-docker
   # If unset use "latest"
-  tag: "latest"
+  tag: plexpass
   sha: ""
   pullPolicy: IfNotPresent
 
@@ -121,7 +121,7 @@ commonLabels: {}
 extraEnv:
   # This claim is optional, and is only used for the first startup of PMS
   # The claim is obtained from https://www.plex.tv/claim/ is is only valid for a few minutes
-  PLEX_CLAIM: "claim-TxPZeksXEomxwznWzyHv"
+  #   PLEX_CLAIM: "claim-TxPZeksXEomxwznWzyHv"
   #   HOSTNAME: "PlexServer"
   #   TZ: "Etc/UTC"
   #   PLEX_UPDATE_CHANNEL: "5"
