@@ -23,10 +23,10 @@ pms:
   resources:
     limits:
       cpu: 8
-      memory: 8Gi
+      memory: 32Gi
     requests:
       cpu: 8
-      memory: 8Gi
+      memory: 32Gi
 
 # A basic image that will convert the configmap to a file in the rclone config volume
 # this is ignored if rclone is not enabled
@@ -121,7 +121,7 @@ commonLabels: {}
 extraEnv:
   # This claim is optional, and is only used for the first startup of PMS
   # The claim is obtained from https://www.plex.tv/claim/ is is only valid for a few minutes
-  #   PLEX_CLAIM: "claim-TxPZeksXEomxwznWzyHv"
+  PLEX_CLAIM: "claim-jRmiMXxAr3bx3S8Stxzc"
   #   HOSTNAME: "PlexServer"
   #   TZ: "Etc/UTC"
   #   PLEX_UPDATE_CHANNEL: "5"
