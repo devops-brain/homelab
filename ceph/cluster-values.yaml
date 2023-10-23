@@ -586,11 +586,11 @@ cephFileSystems:
         activeStandby: true
         resources:
           limits:
-            cpu: "2000m"
-            memory: "4Gi"
+            cpu: "2"
+            memory: "16Gi"
           requests:
-            cpu: "2000m"
-            memory: "4Gi"
+            cpu: "2"
+            memory: "16Gi"
         priorityClassName: system-cluster-critical
     storageClass:
       enabled: true
