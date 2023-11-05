@@ -1,22 +1,23 @@
 #!/usr/bin/env bash
 
 whoami
-for i in `seq 1 15`
+for i in `seq 1 30`
 do
   sleep 1s
   #echo ${i}
-  #echo $(juju status | grep 192.168. | grep '/' | awk '{print $3}' | sort | uniq | wc -l)
-  #echo $(juju status | grep 192.168. | grep '/' | awk '{print $3}' | sort | uniq)
-  until [ "$(juju status | grep 192.168. | grep '/' | grep -v 'default' | awk '{print $3}' | sort | uniq | wc -l)" == "1" ]
+  #echo $(juju status -m kube | grep 192.168. | grep '/' | grep -v 'default' | grep -v 'ubuntu' | awk '{print $2}' | sort | uniq)
+  #echo $(juju status -m kube | grep 192.168. | grep '/' | grep -v 'default' | grep -v 'ubuntu' | awk '{print $3}' | sort | uniq)
+  until [ "$(juju status -m kube | grep 192.168. | grep '/' | grep -v 'default' | grep -v 'ubuntu' | awk '{print $3}' | sort | uniq | wc -l)" == "1" ]
   do
-    until [ "$(juju status | grep 192.168. | grep '/' | grep -v 'default' | awk '{print $3}' | sort | uniq)" == "idle" ]
+    until [ "$(juju status -m kube | grep 192.168. | grep '/' | grep -v 'default' | grep -v 'ubuntu' | awk '{print $3}' | sort | uniq)" == "idle" ]
     do
-      until [ "$(juju status | grep 192.168. | grep '/' | grep -v 'default' | awk '{print $2}' | sort | uniq | wc -l)" == "1" ]
+      until [ "$(juju status -m kube | grep 192.168. | grep '/' | grep -v 'default' | grep -v 'ubuntu' | awk '{print $2}' | sort | uniq | wc -l)" == "1" ]
       do
-        until [ "$(juju status | grep 192.168. | grep '/' | grep -v 'default' | awk '{print $2}' | sort | uniq)" == "active" ]
+        until [ "$(juju status -m kube | grep 192.168. | grep '/' | grep -v 'default' | grep -v 'ubuntu' | awk '{print $2}' | sort | uniq)" == "active" ]
         do
-          #echo $(juju status | grep 192.168. | grep '/' | awk '{print $2}' | sort | uniq)
-          #echo $(juju status | grep 192.168. | grep '/' | awk '{print $3}' | sort | uniq)
+          echo ${i}
+          echo $(juju status -m kube | grep 192.168. | grep '/' | grep -v 'default' | grep -v 'ubuntu' | awk '{print $2}' | sort | uniq)
+          echo $(juju status -m kube | grep 192.168. | grep '/' | grep -v 'default' | grep -v 'ubuntu' | awk '{print $3}' | sort | uniq)
           sleep 1s
         done
       done
