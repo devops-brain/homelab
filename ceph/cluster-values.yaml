@@ -544,17 +544,9 @@ cephFileSystems:
           size: 3
         deviceClass: ssd
       dataPools:
-        - name: default
+        - name: cephfs
           replicated:
             size: 3
-          failureDomain: host
-          deviceClass: ssd
-          parameters:
-            compression_mode: none
-        - name: cephfs
-          erasureCoded:
-            dataChunks: 4
-            codingChunks: 2
           failureDomain: host
           deviceClass: hdd
           parameters:
