@@ -48,7 +48,7 @@ cephClusterSpec:
         cpu: "100m"
         memory: "1Gi"
       limits:
-        cpu: "2"
+        cpu: "1"
         memory: "16Gi"
   #   prepareosd:
   #   mgr-sidecar:
