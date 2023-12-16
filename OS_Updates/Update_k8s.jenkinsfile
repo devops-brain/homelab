@@ -109,6 +109,22 @@ pipeline {
             echo "kubernetes-worker/5 is updated, but we may need to arrange rebooting."
           }
         }
+        stage('update kubernetes-worker/6') {
+          steps {
+            echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+            sh "##juju ssh kubernetes-worker/6 'sudo apt update && sudo apt dist-upgrade -y && sudo apt autoremove -y && sudo snap refresh'"
+            sh "juju ssh kubernetes-worker/6 'sudo apt update && sudo apt dist-upgrade -y && sudo apt autoremove -y && sudo snap refresh'"
+            echo "kubernetes-worker/6 is updated, but we may need to arrange rebooting."
+          }
+        }
+        stage('update kubernetes-worker/7') {
+          steps {
+            echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+            sh "##juju ssh kubernetes-worker/7 'sudo apt update && sudo apt dist-upgrade -y && sudo apt autoremove -y && sudo snap refresh'"
+            sh "juju ssh kubernetes-worker/7 'sudo apt update && sudo apt dist-upgrade -y && sudo apt autoremove -y && sudo snap refresh'"
+            echo "kubernetes-worker/7  is updated, but we may need to arrange rebooting."
+          }
+        }
       }
     }
     stage('initiate reboot') {
@@ -127,6 +143,8 @@ pipeline {
         sh "juju ssh kubernetes-worker/3 'sudo shutdown -r +13'"
         sh "juju ssh kubernetes-worker/4 'sudo shutdown -r +33'"
         sh "juju ssh kubernetes-worker/5 'sudo shutdown -r +53'"
+        sh "juju ssh kubernetes-worker/6 'sudo shutdown -r +63'"
+        sh "juju ssh kubernetes-worker/7 'sudo shutdown -r +73'"
         echo "cluster rebooted."
       }
     }
