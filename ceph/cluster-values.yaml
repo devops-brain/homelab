@@ -286,10 +286,10 @@ cephClusterSpec:
         memory: "8Gi"
     osd:
       limits:
-        cpu: "2"
+        cpu: "1500m"
         memory: "8Gi"
       requests:
-        cpu: "2"
+        cpu: "1500m"
         memory: "8Gi"
     prepareosd:
       # limits: It is not recommended to set limits on the OSD prepare job
