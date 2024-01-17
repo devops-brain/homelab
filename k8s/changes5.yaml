@@ -22,13 +22,15 @@ applications:
       allow-privileged: 'true'
       enable-dashboard-addons: True
   kubernetes-worker:
-    num_units: 3
+    num_units: 5
     options:
-      ingress: 'true'
+      ingress: False
     to:
       - '1'
       - '2'
       - '3'
+      - '4'
+      - '5'
 machines:
   '0':
     series: jammy
@@ -37,4 +39,8 @@ machines:
   '2':
     series: jammy
   '3':
+    series: jammy
+  '4':
+    series: jammy
+  '5':
     series: jammy

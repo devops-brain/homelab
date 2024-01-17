@@ -10,6 +10,7 @@ applications:
       - 'lxd:3'
   kubeapi-load-balancer:
     num_units: 1
+    expose: True
     to:
       - 'lxd:0'
   kubernetes-control-plane:
@@ -22,15 +23,20 @@ applications:
       allow-privileged: 'true'
       enable-dashboard-addons: True
   kubernetes-worker:
-    num_units: 5
+    num_units: 9
+    expose: True
     options:
-      ingress: 'true'
+      ingress: False
     to:
       - '1'
       - '2'
       - '3'
       - '4'
       - '5'
+      - '6'
+      - '7'
+      - '8'
+      - '9'
 machines:
   '0':
     series: jammy
@@ -43,4 +49,12 @@ machines:
   '4':
     series: jammy
   '5':
+    series: jammy
+  '6':
+    series: jammy
+  '7':
+    series: jammy
+  '8':
+    series: jammy
+  '9':
     series: jammy
