@@ -3,29 +3,28 @@ applications:
     to:
       - 'lxd:0'
   etcd:
-    num_units: 2
+    num_units: 1
     to:
-      - 'lxd:1'
       - 'lxd:2'
   kubeapi-load-balancer:
     num_units: 1
     to:
-      - 'lxd:0'
+      - 'lxd:1'
   kubernetes-control-plane:
-    num_units: 1
+    num_units: 2
     to:
       - '0'
+      - '1'
     options:
       # the following hurts platform security against compromised pods/containers, but is needed for rook to setup ceph
       # it is apparently needed for ceph-client and gpu usage, so it is staying until I switch off of juju.
       allow-privileged: 'true'
       enable-dashboard-addons: True
   kubernetes-worker:
-    num_units: 2
+    num_units: 1
     options:
       ingress: False
     to:
-      - '1'
       - '2'
 machines:
   '0':

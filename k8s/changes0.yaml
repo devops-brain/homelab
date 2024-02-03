@@ -5,9 +5,7 @@ applications:
   etcd:
     num_units: 0
   kubeapi-load-balancer:
-    num_units: 1
-    to:
-      - 'lxd:0'
+    num_units: 0
   kubernetes-control-plane:
     num_units: 1
     to:

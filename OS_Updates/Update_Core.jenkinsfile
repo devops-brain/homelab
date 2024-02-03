@@ -19,6 +19,14 @@ pipeline {
         echo "the KVM server is updated, but we may need to arrange rebooting."
       }
     }
+    stage('update the second KVM server'){
+      steps {
+        echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+        sh "##ssh -Y ubuntu@ideal-mouse.khoyi.io 'sudo apt update && sudo apt dist-upgrade -y && sudo apt autoremove -y && sudo snap refresh'"
+        sh "ssh -Y ubuntu@ideal-mouse.khoyi.io 'sudo apt update && sudo apt dist-upgrade -y && sudo apt autoremove -y && sudo snap refresh'"
+        echo "the KVM server is updated, but we may need to arrange rebooting."
+      }
+    }
     stage('update the network controller'){
       steps {
         echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"

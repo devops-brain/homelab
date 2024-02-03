@@ -7,7 +7,7 @@ image:
   repository: rook/ceph
   # -- Image tag
   # @default -- `master`
-  tag: v1.13.2
+  tag: master
   # -- Image pull policy
   pullPolicy: IfNotPresent
 
@@ -23,11 +23,11 @@ crds:
 # -- Pod resource requests & limits
 resources:
   limits:
-    cpu: 1000m
+    cpu: 1500m
     memory: 512Mi
   requests:
-    cpu: 1000m
-    memory: 512Mi
+    cpu: 200m
+    memory: 128Mi
 
 # -- Kubernetes [`nodeSelector`](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#nodeselector) to add to the Deployment.
 nodeSelector: {}
@@ -210,56 +210,56 @@ csi:
     - name : csi-provisioner
       resource:
         requests:
-          memory: 256Mi
+          memory: 128Mi
           cpu: 100m
         limits:
           memory: 256Mi
-          cpu: 100m
+          cpu: 200m
     - name : csi-resizer
       resource:
         requests:
-          memory: 256Mi
+          memory: 128Mi
           cpu: 100m
         limits:
           memory: 256Mi
-          cpu: 100m
+          cpu: 200m
     - name : csi-attacher
       resource:
         requests:
-          memory: 256Mi
+          memory: 128Mi
           cpu: 100m
         limits:
           memory: 256Mi
-          cpu: 100m
+          cpu: 200m
     - name : csi-snapshotter
       resource:
         requests:
-          memory: 256Mi
+          memory: 128Mi
           cpu: 100m
         limits:
           memory: 256Mi
-          cpu: 100m
+          cpu: 200m
     - name : csi-rbdplugin
       resource:
         requests:
-          memory: 1Gi
-          cpu: 500m
+          memory: 512Mi
+          cpu: 250m
         limits:
           memory: 1Gi
           cpu: 500m
     - name : csi-omap-generator
       resource:
         requests:
-          memory: 1Gi
-          cpu: 500m
+          memory: 512Mi
+          cpu: 250m
         limits:
           memory: 1Gi
           cpu: 500m
     - name : liveness-prometheus
       resource:
         requests:
-          memory: 256Mi
-          cpu: 100m
+          memory: 128Mi
+          cpu: 50m
         limits:
           memory: 256Mi
           cpu: 100m
@@ -270,24 +270,24 @@ csi:
     - name : driver-registrar
       resource:
         requests:
-          memory: 256Mi
-          cpu: 100m
+          memory: 128Mi
+          cpu: 50m
         limits:
           memory: 256Mi
           cpu: 100m
     - name : csi-rbdplugin
       resource:
         requests:
-          memory: 1Gi
-          cpu: 500m
+          memory: 512Mi
+          cpu: 250m
         limits:
           memory: 1Gi
           cpu: 500m
     - name : liveness-prometheus
       resource:
         requests:
-          memory: 256Mi
-          cpu: 100m
+          memory: 128Mi
+          cpu: 50m
         limits:
           memory: 256Mi
           cpu: 100m
@@ -298,48 +298,48 @@ csi:
     - name : csi-provisioner
       resource:
         requests:
-          memory: 256Mi
-          cpu: 200m
+          memory: 128Mi
+          cpu: 100m
         limits:
           memory: 256Mi
           cpu: 200m
     - name : csi-resizer
       resource:
         requests:
-          memory: 256Mi
-          cpu: 200m
+          memory: 128Mi
+          cpu: 100m
         limits:
           memory: 256Mi
           cpu: 200m
     - name : csi-attacher
       resource:
         requests:
-          memory: 256Mi
-          cpu: 200m
+          memory: 128Mi
+          cpu: 100m
         limits:
           memory: 256Mi
           cpu: 200m
     - name : csi-snapshotter
       resource:
         requests:
-          memory: 256Mi
-          cpu: 200m
+          memory: 128Mi
+          cpu: 100m
         limits:
           memory: 256Mi
           cpu: 200m
     - name : csi-cephfsplugin
       resource:
         requests:
-          memory: 1Gi
-          cpu: 500m
+          memory: 512Mi
+          cpu: 250m
         limits:
           memory: 1Gi
           cpu: 500m
     - name : liveness-prometheus
       resource:
         requests:
-          memory: 256Mi
-          cpu: 100m
+          memory: 128Mi
+          cpu: 50m
         limits:
           memory: 256Mi
           cpu: 100m
@@ -350,24 +350,24 @@ csi:
     - name : driver-registrar
       resource:
         requests:
-          memory: 256Mi
-          cpu: 100m
+          memory: 128Mi
+          cpu: 50m
         limits:
           memory: 256Mi
           cpu: 100m
     - name : csi-cephfsplugin
       resource:
         requests:
-          memory: 1Gi
-          cpu: 500m
+          memory: 512Mi
+          cpu: 250m
         limits:
           memory: 1Gi
           cpu: 500m
     - name : liveness-prometheus
       resource:
         requests:
-          memory: 256Mi
-          cpu: 100m
+          memory: 128Mi
+          cpu: 50m
         limits:
           memory: 256Mi
           cpu: 100m
@@ -378,24 +378,24 @@ csi:
     - name : csi-provisioner
       resource:
         requests:
-          memory: 256Mi
+          memory: 128Mi
           cpu: 100m
         limits:
           memory: 256Mi
-          cpu: 100m
+          cpu: 200m
     - name : csi-nfsplugin
       resource:
         requests:
-          memory: 1Gi
+          memory: 512Mi
           cpu: 250m
         limits:
           memory: 1Gi
-          cpu: 250m
+          cpu: 500m
     - name : csi-attacher
       resource:
         requests:
-          memory: 1Gi
-          cpu: 500m
+          memory: 512Mi
+          cpu: 250m
         limits:
           memory: 1Gi
           cpu: 500m
@@ -406,19 +406,19 @@ csi:
     - name : driver-registrar
       resource:
         requests:
-          memory: 256Mi
-          cpu: 100m
+          memory: 128Mi
+          cpu: 50m
         limits:
           memory: 256Mi
           cpu: 100m
     - name : csi-nfsplugin
       resource:
         requests:
-          memory: 1Gi
+          memory: 512Mi
           cpu: 250m
         limits:
           memory: 1Gi
-          cpu: 250m
+          cpu: 500m
 
   # Set provisionerTolerations and provisionerNodeAffinity for provisioner pod.
   # The CSI provisioner would be best to start on the same nodes as other ceph daemons.
@@ -543,13 +543,13 @@ csi:
 
   topology:
     # -- Enable topology based provisioning
-    enabled: true
+    enabled: false
     # NOTE: the value here serves as an example and needs to be
     # updated with node labels that define domains of interest
     # -- domainLabels define which node labels to use as domains
     # for CSI nodeplugins to advertise their domains
     domainLabels:
-      - kubernetes.io/hostname
+    # - kubernetes.io/hostname
     # - topology.kubernetes.io/zone
     # - topology.rook.io/rack
 

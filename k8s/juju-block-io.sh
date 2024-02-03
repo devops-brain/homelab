@@ -3,7 +3,7 @@
 whoami
 for i in `seq 1 30`
 do
-  sleep 1s
+  sleep 5s
   echo ${i}
   echo $(juju status -m kube | grep 192.168. | grep '/' | grep -v 'default' | grep -v 'ubuntu' | awk '{print $2}' | sort | uniq)
   echo $(juju status -m kube | grep 192.168. | grep '/' | grep -v 'default' | grep -v 'ubuntu' | awk '{print $3}' | sort | uniq)
