@@ -571,8 +571,8 @@ cephObjectStores:
         deviceClass: ssd
       dataPool:
         erasureCoded:
-          dataChunks: 4
-          codingChunks: 2
+          dataChunks: 2
+          codingChunks: 1
         failureDomain: host
         deviceClass: ssd
       preservePoolsOnDelete: true
