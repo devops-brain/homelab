@@ -12,8 +12,8 @@ global:
   imageRegistry: ""
 
 ingress:
-  enabled: true
-  ingressClassName: "nginx-ingress-controller"
+  enabled: false
+  ingressClassName: "nginx"
   url: "plex.khoyi.io"
   annotations: {}
 
