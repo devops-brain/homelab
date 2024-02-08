@@ -31,11 +31,11 @@ spec:
           command: ["jenkins-slave", "-url", "http://192.168.77.0:8080", "-workDir=/home/jenkins/agent", "f8785d178afa3882b7eb243e40d4a3a679209925d47bb5c65afba81fe49db0de", "k8splex"]
           resources:
             limits:
-              cpu: "1000m"
+              cpu: "8"
               memory: 8Gi
             requests:
-              cpu: "1000m"
-              memory: 8Gi
+              cpu: "1"
+              memory: 2Gi
           volumeMounts:
             - name: plexbackups
               mountPath: /srv/backups
