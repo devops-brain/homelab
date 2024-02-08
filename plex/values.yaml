@@ -22,11 +22,11 @@ pms:
   configStorage: 256Gi
   resources:
     limits:
-      cpu: 8
-      memory: 8Gi
+      cpu: 12
+      memory: 12Gi
     requests:
-      cpu: 8
-      memory: 8Gi
+      cpu: 1
+      memory: 1Gi
 
 # A basic image that will convert the configmap to a file in the rclone config volume
 # this is ignored if rclone is not enabled
