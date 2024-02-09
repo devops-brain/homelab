@@ -500,15 +500,15 @@ cephFileSystems:
           parameters:
             compression_mode: none
       metadataServer:
-        activeCount: 1
+        activeCount: 2
         activeStandby: true
         resources:
           limits:
-            cpu: "2"
-            memory: "4Gi"
+            cpu: "4"
+            memory: "8Gi"
           requests:
-            cpu: "2"
-            memory: "4Gi"
+            cpu: "4"
+            memory: "8Gi"
         priorityClassName: system-cluster-critical
     storageClass:
       enabled: true
