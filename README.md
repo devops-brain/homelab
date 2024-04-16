@@ -157,24 +157,26 @@ cache credentials, bad practice but acceptable shortcut in a homelab
     
 config juju
 
+    mkdir ~/tmp
     echo '''clouds:
       HomeLab:
         type: maas
         auth-types: [oauth1]
         endpoint: http://192.168.76.4:5240/MAAS
-    ''' > /tmp/maas.yaml
-    juju add-cloud --client HomeLab /tmp/maas.yaml
+    ''' > ~/tmp/maas.yaml
+    juju add-cloud --client HomeLab ~/tmp/maas.yaml
     juju clouds
     echo '''credentials:
       HomeLab:
         HomeLab:
           auth-type: oauth1
           maas-oauth: << key grabbed from UI >>
-    ''' > /tmp/juju.yaml
-    juju add-credential HomeLab -f /tmp/juju.yaml
+    ''' > ~/tmp/juju.yaml
+    juju add-credential HomeLab -f ~/tmp/juju.yaml
     juju credentials
     juju clouds
-    
+    rm -rfv ~/tmp
+
 deploy controller
 
     #juju bootstrap HomeLab homelab --bootstrap-series=jammy --config autocert-dns-name=juju.khoyi.io --config default-series=jammy

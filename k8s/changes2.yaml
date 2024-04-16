@@ -1,31 +1,27 @@
 applications:
   easyrsa:
     to:
-      - 'lxd:0'
+      - '0'
   etcd:
-    num_units: 1
-    to:
-      - 'lxd:2'
+    num_units: 0
   kubeapi-load-balancer:
     num_units: 1
     to:
-      - 'lxd:1'
-  kubernetes-control-plane:
-    num_units: 2
-    to:
-      - '0'
       - '1'
+  kubernetes-control-plane:
+    num_units: 1
+    to:
+      - '2'
     options:
       # the following hurts platform security against compromised pods/containers, but is needed for rook to setup ceph
       # it is apparently needed for ceph-client and gpu usage, so it is staying until I switch off of juju.
-      allow-privileged: 'true'
+      allow-privileged: 'false'
       enable-dashboard-addons: True
   kubernetes-worker:
-    num_units: 1
+    num_units: 0
+    expose: True
     options:
       ingress: False
-    to:
-      - '2'
 machines:
   '0':
     series: jammy

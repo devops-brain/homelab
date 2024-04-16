@@ -15,21 +15,26 @@ pipeline {
                 # 3.x  juju model-config -m kube default-series=Jammy
                 juju model-config -m kube default-series=jammy
                 sleep 1s
-                juju add-machine -m kube nice-lark.khoyi.io
-                sleep 6s
-                juju add-machine -m kube casual-corgi.khoyi.io
-                sleep 60s
-                juju add-machine -m kube stable-owl.khoyi.io
-                sleep 60s
-                juju add-machine -m kube nice-chimp.khoyi.io
-                sleep 6s
-                juju add-machine -m kube loving-cattle.khoyi.io
-                sleep 60s
-                juju add-machine -m kube golden-tiger.khoyi.io
-                sleep 60s
-                juju add-machine -m kube solid-buck.khoyi.io
-                sleep 6s
-                juju deploy -m kube --map-machines=existing charmed-kubernetes --channel 1.28/stable --overlay ./k8s/changes.yaml --overlay ./k8s/addceph.yaml
+
+                n=0
+                for machine in k8s-cert-manager k8s-lb k8s-control-01 k8s-control-02 k8s-etcd-01 k8s-etcd-02 k8s-etcd-03 k8s-worker-01 k8s-worker-02 k8s-worker-03
+                do
+                  echo ${n} ${machine}.khoyi.io
+                  juju add-machine -m kube ${machine}.khoyi.io
+                  sleep 6s
+                  juju deploy -m kube --map-machines=existing charmed-kubernetes --channel 1.29/stable --overlay ./k8s/changes${n}.yaml --overlay ./k8s/flannel.yaml
+                  n=$((n+1))
+                  sleep 300s
+                done
+                ./k8s/juju-block-io.sh
+
+                # copy kubeconfig credentials to workstation
+                mkdir -p ~/.kube
+                mkdir -p ~/kube
+                juju ssh kubernetes-control-plane/leader -- cat config > ~/.kube/config
+                juju ssh kubernetes-control-plane/leader -- cat config > ~/kube/config
+
+                #juju deploy -m kube --map-machines=existing charmed-kubernetes --channel 1.28/stable --overlay ./k8s/changes.yaml --overlay ./k8s/addceph.yaml
                 #juju deploy -m kube --map-machines=existing charmed-kubernetes --channel 1.28/stable --overlay ./k8s/changes.yaml
               fi'''
       }
@@ -43,7 +48,7 @@ pipeline {
         sh "ls -hal k8s"
         sh "ls -hal k8s/changes.yaml"
         sh "##bash -c 'juju deploy -m kube --map-machines=existing charmed-kubernetes --channel 1.28/stable --overlay k8s/flannel.yaml --overlay k8s/changes.yaml'"
-        sh "juju deploy -m kube --map-machines=existing charmed-kubernetes --channel 1.29/beta --overlay ./k8s/changes7.yaml --overlay k8s/flannel.yaml"
+        sh "juju deploy -m kube --map-machines=existing charmed-kubernetes --channel 1.29/stable --overlay ./k8s/changes9.yaml --overlay k8s/flannel.yaml"
         sh "./k8s/juju-block-io.sh"
         echo "I'll need to test if the kubernetes-master charm switches to active prematurely, but this should block IO until the deployment is complete."
       }
